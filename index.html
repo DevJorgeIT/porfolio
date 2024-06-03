@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio website HTML CSS only</title>
+    <link rel="stylesheet" href="styleindex.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">   
+</head>
+<body>
+    <div class="progress__wrapper">
+        <div class="progress__bar"></div>
+    </div>
+
+    <header class="header">
+
+        <div id="logo"  class="container">       
+            <div class="profile-wrapper">
+                <div class="profile">
+                    <div class="profile-image">
+                        <img
+                            src="Media/Foto gmail estudiante-1.png"
+                            alt="Profile"
+                        >
+                    </div>
+                    <ul class="social-icons">
+                        <li>
+                            <a href="https://www.instagram.com/jherraizsoler_zgz/" title="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"4
+                                     stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.linkedin.com/in/jorge-herraiz-soler-25679725b/" title="Linkedin">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 
+                                             2 0 0 1 -2 -2z">
+                                    </path>
+                                    <path d="M8 11l0 5"></path>
+                                    <path d="M8 8l0 .01"></path>
+                                    <path d="M12 16l0 -5"></path>
+                                    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+                                 </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/jherraizsoler" title="Github">
+                                        
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                viewBox="0 0 30 30" stroke-width="1.5" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                               <path d="M0 15c0 7.033 4.836 12.945 11.375 14.563.3.077.635-.19.625-.5V22.5c0-.333.197-.652.563-.844.37-.185.28-.856-.125-.937-1.9-.38-3.52-1.143-4.657-2.157C6.646 17.547 6 16.314 6 15c0-.915.327-1.793.906-2.594.06-.082.092-.18.094-.28V7.343l3.97 2.125c.122.066.273.077.405.03C12.488 9.168 13.698 9 15 9s2.512.168 3.625.5c.132.047.283.035.406-.03L23 7.343v4.78c.002.1.035.2.094.282.58.8.906 1.68.906 2.594 0 1.315-.645 2.548-1.78 3.563-1.138 1.014-2.76 1.776-4.657 2.156-.406.08-.495.75-.125.936.365.192.562.51.562.844v6.563c-.01.31.326.577.625.5C25.165 27.945 30 22.032 30 15c0-8.278-6.722-15-15-15C6.722 0 0 6.722 0 15zM15 1c7.738 0 14 6.262 14 14 0 6.33-4.24 11.547-10 13.28V22.5c0-.4-.154-.756-.375-1.063 1.663-.457 3.182-1.175 4.28-2.156C24.206 18.124 25 16.64 25 15c0-1.083-.394-2.074-1-2.97V6.5c.003-.35-.446-.613-.75-.437L18.656 8.53C17.516 8.22 16.296 8 15 8c-1.295 0-2.517.218-3.656.53L6.75 6.064c-.304-.176-.753.087-.75.437v5.53c-.606.896-1 1.887-1 2.97 0 1.64.795 3.123 2.094 4.28 1.1.982 2.62 1.7 4.28 2.158-.22.306-.374.66-.374 1.062v1.688c-1.09.406-1.807.493-2.25.406-.478-.094-.736-.34-1.03-.75-.592-.823-1.173-2.34-3.095-2.836-.654-.175-.875.8-.25.97 1.508.39 1.805 1.448 2.53 2.46.364.505.886.973 1.658 1.125.643.126 1.422.03 2.437-.313v3.03C5.242 26.548 1 21.33 1 15 1 7.262 7.262 1 15 1z"/>
+                               
+                            </svg>
+
+                            </a>
+                        </li>
+
+                      <!--
+                        <li>
+                            <a href="#twitter" title="Twitter">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+                                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"
+                                >
+                                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 
+                                            10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5
+                                            4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                                    >
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#threads" title="Threads">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M19 7.5c-1.333 -3 -3.667 -4.5 -7 -4.5c-5 0 -8 2.5 -8 9s3.5 9 8 9s7 -3 7
+                                            -5s-1 -5 -7 -5c-2.5 0 -3 1.25 -3 2.5c0 1.5 1 2.5 2.5 2.5c2.5 0 3.5 -1.5 
+                                            3.5 -5s-2 -4 -3 -4s-1.833 .333 -2.5 1"
+                                    >
+                                    </path>
+                                 </svg>
+                            </a>
+                        </li>
+                      -->
+                    </ul>
+                    <div class="profile-name">
+                        <h2 id="nombreProfile">Jorge Herraiz Soler</h2>
+                        <div class="profile-bio">
+                            Soy estudiante para ser programador desarrollador de aplicaciones multiplataforma 
+                            con <em><b>Java</b></em> y <em><b>Oracle</b></em>, <em><b>MySQL</b></em> con aprendizaje continuo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <img  id="logo" src="Media/JHS_nuevo.png"  alt="Logo JHS developer">
+        <nav class="navbar">
+           <!-- <a href="#">Home</a> 
+            <a href="#">About</a>
+           <a href="#">Services</a> -->
+           <a id="a_portafolio" href="#">Portfolio</a>
+           <!-- <a href="#">Blog</a>  
+           <a href="#">Contact</a> -->
+       
+
+       </nav>
+
+    </header>
+
+    <!-- MENU NAVEGACIÓN -->        
+    <formaIzquierda class="formaIzquierda">
+    </formaIzquierda>
+
+     <nav class="containerNav">
+        <!-- Academico -->
+            <div class="elementos"><a href="#">
+                <svg width="10%" height="10%" viewBox="100 100 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M194.146 138.637C173.731 150.503 151.992 160.035 132 172.976C128.031 175.546 117.601 178.163 117.601 178.698C117.601 179.532 125.261 180.043 125.937 180.335C135.03 184.259 199.396 206.11 207.942 211.739C209.603 211.739 283.144 175.286 286.606 173.795C287.074 173.591 288.121 174.338 288.121 173.795C288.121 172.235 275.815 168.61 274.48 168.07C261.327 162.748 202.181 138.312 200.968 137"  stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M148.552 193.944C147.201 202.719 146.74 211.578 146.274 220.426C146.271 220.508 146.118 246.743 146.274 246.908C147.17 247.852 148.805 246.908 150.073 246.908C155.871 246.908 195.435 258.019 206.43 262.735C208.077 263.441 257.734 241.191 258.404 237.931C260.91 225.742 258.404 209.464 258.404 197.959"  stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M112.985 227.821C112.195 210.434 108.533 204.525 113.752 187.862C114.191 186.455 115.795 179.708 117.581 179.708C118.438 179.708 118.992 192.729 119.112 193.569C120.49 203.088 125.937 222.099 125.24 230.268C125.224 230.471 122.178 250.075 122.178 241.682"  stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+            </a></div>
+        <!-- Experiencia-->    
+            <div class="elementos"><a href ="#">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                    <path id="user--experience-design_1_" d="M16,30.36c-2.605,0-5.093-0.712-7.194-2.058l0.389-0.605
+                        c1.985,1.271,4.338,1.942,6.806,1.942c2.404,0,4.822-0.69,6.808-1.944l0.385,0.609C21.093,29.63,18.539,30.36,16,30.36z M28,26.36
+                        c-1.853,0-3.36-1.508-3.36-3.36s1.508-3.36,3.36-3.36s3.36,1.508,3.36,3.36S29.853,26.36,28,26.36z M28,20.36
+                        c-1.456,0-2.64,1.184-2.64,2.64s1.184,2.64,2.64,2.64s2.64-1.184,2.64-2.64S29.456,20.36,28,20.36z M8,26.36H1
+                        c-0.129,0-0.248-0.069-0.312-0.181s-0.064-0.25,0.001-0.361l3.5-6c0.129-0.221,0.493-0.221,0.622,0l3.5,6
+                        c0.065,0.111,0.065,0.249,0.001,0.361C8.248,26.291,8.129,26.36,8,26.36z M1.627,25.64h5.746L4.5,20.715L1.627,25.64z M21.36,23
+                        h-0.72v-1.683c0-2.16-1.466-4.016-3.565-4.513c-0.15-0.035-0.261-0.163-0.275-0.316c-0.014-0.154,0.071-0.3,0.212-0.363
+                        c0.899-0.4,1.479-1.293,1.479-2.275c0-1.373-1.117-2.49-2.49-2.49s-2.49,1.117-2.49,2.49c0,0.982,0.581,1.875,1.48,2.275
+                        c0.141,0.063,0.226,0.209,0.212,0.362c-0.014,0.154-0.125,0.282-0.275,0.317c-2.1,0.498-3.566,2.353-3.566,4.513V23h-0.72v-1.683
+                        c0-2.221,1.342-4.162,3.347-4.968c-0.745-0.601-1.197-1.515-1.197-2.499c0-1.77,1.44-3.21,3.21-3.21c1.771,0,3.211,1.44,3.211,3.21
+                        c0,0.984-0.452,1.898-1.197,2.499c2.005,0.806,3.347,2.748,3.347,4.968V23H21.36z M29.321,18.027l-0.719-0.055
+                        c0.025-0.321,0.037-0.646,0.037-0.973c0-4.708-2.607-8.993-6.806-11.181l0.332-0.639C26.604,7.493,29.36,12.022,29.36,17
+                        C29.36,17.347,29.347,17.688,29.321,18.027z M2.679,18.027C2.653,17.688,2.64,17.347,2.64,17c0-5,2.756-9.542,7.193-11.855
+                        l0.333,0.639C5.968,7.972,3.36,12.27,3.36,17c0,0.327,0.013,0.651,0.037,0.973L2.679,18.027z M19,7.36h-6
+                        c-0.199,0-0.36-0.161-0.36-0.36V1c0-0.199,0.161-0.36,0.36-0.36h6c0.199,0,0.36,0.161,0.36,0.36v6C19.36,7.199,19.199,7.36,19,7.36z
+                        M13.36,6.64h5.28V1.36h-5.28C13.36,1.36,13.36,6.64,13.36,6.64z"/>
+                   
+                </svg> 
+            </a></div>   
+        <!-- Cursos -->
+            <div class="elementos"><a href ="#" >
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 349.62 349.62" style="enable-background:new 0 0 32 32;" xml:space="preserve" stroke-opacity="10">
+                    <path d="M271.995,349.62h-48.779c-4.418,0-8-3.582-8-8s3.582-8,8-8h16.39v-15.067h-74.416c-4.418,0-8-3.582-8-8v-103.35
+                        c0-4.418,3.582-8,8-8H330.02c4.418,0,8,3.582,8,8v103.35c0,4.418-3.582,8-8,8h-74.416v15.067h16.39c4.418,0,8,3.582,8,8
+                        S276.413,349.62,271.995,349.62z M247.732,302.552h74.288v-87.35H173.189v87.35h74.288
+                        C247.562,302.55,247.648,302.55,247.732,302.552z M247.604,291.456c-4.418,0-8-3.582-8-8v-2.851c0-4.418,3.582-8,8-8s8,3.582,8,8
+                        v2.851C255.604,287.874,252.022,291.456,247.604,291.456z M131.895,286.94H19.599c-4.418,0-8-3.582-8-8s3.582-8,8-8h112.296
+                        c4.418,0,8,3.582,8,8S136.314,286.94,131.895,286.94z M268.884,279.168c-1.358,0-2.734-0.346-3.995-1.074l-2.469-1.427
+                        c-3.826-2.21-5.135-7.104-2.924-10.929c2.21-3.826,7.103-5.136,10.929-2.925l2.469,1.427c3.826,2.21,5.135,7.104,2.924,10.929
+                        C274.336,277.735,271.647,279.168,268.884,279.168z M226.326,279.167c-2.765,0-5.455-1.435-6.936-4.002
+                        c-2.208-3.826-0.897-8.719,2.93-10.928l2.47-1.426c3.824-2.209,8.719-0.897,10.928,2.93c2.208,3.826,0.897,8.719-2.93,10.928
+                        l-2.47,1.426C229.058,278.822,227.683,279.167,226.326,279.167z M228.781,256.013c-1.356,0-2.73-0.345-3.99-1.071l-2.47-1.425
+                        c-3.827-2.207-5.14-7.1-2.933-10.927c2.208-3.828,7.1-5.141,10.927-2.933l2.47,1.425c3.827,2.207,5.14,7.1,2.933,10.927
+                        C234.237,254.578,231.547,256.013,228.781,256.013z M266.429,256.013c-2.765,0-5.454-1.435-6.936-4.001
+                        c-2.209-3.826-0.898-8.719,2.928-10.928l2.469-1.426c3.828-2.209,8.719-0.898,10.929,2.928c2.209,3.826,0.898,8.719-2.928,10.928
+                        l-2.469,1.426C269.162,255.667,267.787,256.013,266.429,256.013z M34.09,255.297c-1.001,0-2.02-0.189-3.005-0.589
+                        c-4.094-1.661-6.066-6.327-4.405-10.421l25.393-62.584c7.877-19.409,16.202-33.162,26.198-43.281
+                        c13.281-13.444,29.7-20.262,48.799-20.262h33.682c30.332,0,53.124,16.825,69.68,51.437c1.907,3.986,0.221,8.763-3.765,10.669
+                        c-3.985,1.908-8.763,0.222-10.669-3.765c-10.144-21.206-21.877-33.903-36.769-39.294l-28.856,39.542
+                        c-1.506,2.063-3.908,3.284-6.462,3.284s-4.956-1.221-6.462-3.284l-28.862-39.551c-17.212,6.228-30.229,22.287-41.688,50.521
+                        l-25.392,62.583C40.245,253.412,37.25,255.297,34.09,255.297z M126.181,134.166l17.73,24.296l17.73-24.296
+                        c-0.295-0.004-0.591-0.006-0.888-0.006h-33.683C126.773,134.161,126.476,134.163,126.181,134.166z M247.604,245.149
+                        c-4.418,0-8-3.582-8-8v-2.852c0-4.418,3.582-8,8-8s8,3.582,8,8v2.852C255.604,241.567,252.022,245.149,247.604,245.149z
+                        M143.91,98.887c-27.262,0-49.442-22.181-49.442-49.443c0-22.464,15.061-41.478,35.613-47.476c0.091-0.029,0.184-0.058,0.277-0.084
+                        c2.699-0.769,5.462-1.304,8.257-1.603c0.014-0.001,0.026-0.002,0.04-0.004c1.411-0.149,2.839-0.24,4.282-0.268
+                        c0.017,0.001,0.067-0.002,0.104-0.002c0.014-0.001,0.032-0.001,0.048-0.001c0.019,0,0.035-0.001,0.052-0.001
+                        c0.019,0,0.037-0.001,0.056-0.001c0.016,0.001,0.031,0.001,0.045,0c0.013-0.001,0.025,0,0.037-0.001c0.024,0,0.04-0.005,0.074-0.001
+                        c0.014,0,0.027,0.001,0.042,0c0.038-0.001,0.076-0.001,0.115-0.001h0.002c0.014,0,0.028,0.001,0.042-0.001
+                        c0.041,0,0.085-0.001,0.122,0c0.016,0,0.031-0.001,0.046-0.001c0.022,0,0.046-0.001,0.071,0c0.017,0,0.033,0,0.05,0
+                        c0.025,0.001,0.041,0.001,0.062,0c0.003,0,0.005,0,0.005,0c0.013,0,0.023,0,0.037,0c0.014,0,0.025-0.001,0.039,0
+                        c0.014,0,0.024,0.001,0.039,0c0.012,0,0.026,0,0.039,0c0.012-0.001,0.027,0,0.041,0c0.013-0.001,0.03,0.001,0.043,0.001h0.004
+                        c25.43,0.121,46.456,19.223,48.959,44.528c0.003,0.024,0.005,0.05,0.007,0.075c0.155,1.592,0.235,3.206,0.235,4.839
+                        C193.353,76.706,171.173,98.887,143.91,98.887z M126.74,20.754c-9.74,5.852-16.271,16.522-16.271,28.689
+                        c0,18.44,15.002,33.443,33.442,33.443c16.619,0,30.446-12.185,33.015-28.091c-1.044,0.065-2.091,0.099-3.141,0.099
+                        C151.87,54.895,133.186,40.796,126.74,20.754z M142.042,16.052c4.43,13.424,17.006,22.843,31.742,22.843
+                        c0.617,0,1.233-0.017,1.847-0.05c-4.415-13.18-16.83-22.726-31.449-22.844c-0.016,0-0.032,0-0.047,0c-0.016,0-0.033,0-0.048,0
+                        c-0.016-0.001-0.032,0-0.048-0.001c-0.016,0-0.036,0-0.05,0c-0.022,0.001-0.041,0.001-0.063,0c-0.023,0-0.044,0-0.068,0
+                        c-0.002,0-0.004,0-0.006,0C143.246,16.001,142.642,16.019,142.042,16.052z  stroke-opacity="10" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a></div>
+         <!-- Proyectos -->
+            <div class="elementos"><a href="#t_proyectos">
+                <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 21H20C21.1046 21 22 20.1046 22 19V8C22 6.89543 21.1046 6 20 6H11L9.29687 3.4453C9.1114 3.1671 8.79917 3 8.46482 3H4C2.89543 3 2 3.89543 2 5V19C2 20.1046 2.89543 21 4 21Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a></div>
+        <!-- Valores -->
+            <div class="elementos"><a href ="#">
+                <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                        viewBox="0 0 30 30">
+                    <style type="text/css">
+                        .st0{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10; };
+                    </style>
+                    <path class="st0" d="M3,25l2.6-4.2c1.5-2.3,4-3.8,6.8-3.8H19v0c0,2.2-1.8,4-4,4h-2"/>
+                    <path class="st0" d="M15,21h8l1.2-1.6c1.1-1.5,2.9-2.4,4.8-2.4h0l-2.7,4.8c-1.4,2.6-4.2,4.2-7.1,4.2h0c-4.7,0-9.3,1.4-13.2,4l0,0"/>
+                    <path class="st0" d="M20,9c0,2.2-1.8,4-4,4s-4-1.8-4-4c0-3,4-7,4-7S20,6,20,9z"/>
+                </svg>
+            <!-- Experiencias -->
+            </a></div>    
+        </nav>      
+       
+        
+
+        
+
+    <formaDerecha class="formaDerecha">
+
+    </formaDerecha>
+
+    <section class="home">
+        <div class="global-section-Home">
+           <div class="home-content">
+                <h1>Hola, Soy Jorge Herraiz</h1>
+                <h3>Técnico informático</h3>
+                <p>Actualmente estudiando el 1º curso del Grado superior en Desarrollo de aplicaciones multiplataforma en C.P.I.F.P. Los Enlaces. <br> <br>
+                    Mi objetivo como estudiante es conocer y entender tanto el ecosistema de desarrollo de soluciones, estructuras y documentación en entorno empresarial de productos como los problemas que tienen como los que resuelven. 
+                    Para ello el poder optar a estar en formación Dual para mi es un privilegio y con la mentalidad de concentración, esfuerzo, planificación y estudio autodidacta.
+                </p>
+                <!--
+
+                     <div class="btn-box">
+                        <a href="proyectos.html">Proyectos</a>
+                   </div>
+                -->
+               
+            </div>
+        </div>
+    </section>
+    <section class="seccionesNav">
+        <CENTER> <h2 id="t_proyectos" class="titulos">PROYECTOS</h2></CENTER>
+        <p class="parrafos">
+               Apartado en construcción ... <br>
+                          - Proyectos en planificación, documentación y desarrollo 
+        </p>
+        <div class="articles">
+            <article>
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=900&t=st=1687123388~exp=1687123988~hmac=f3410d0a5c2f20aec66c7d763c789bf0aae9c5026366fe41ae7d18e05e7e406b"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>Redes de una Empresa</h2>
+                    <p>
+                        Proyecto focalizado en la estructura de redes de una empresa a nivel nacional (España),
+                        Estudio, análisis y documentación del procedimiento de las decisiones que se toman para 
+                        crear y administrar un sistema de red para una empresa nacional.
+                              <br>   -  Mapa físico 
+                              <br>  -  Mapa lógico
+
+
+                         En construcción ... <br> 
+                        <a href="#" class="read-more" title="Read More">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>            
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/beautiful-aerial-shot-fronalpstock-mountains-switzerland-beautiful-pink-blue-sky_181624-9315.jpg?w=900&t=st=1687123407~exp=1687124007~hmac=15a1b5a4d3a5af66dfba67bdcd577f769f813bf06fc8b5e50f32f6503099bbd8"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>App Java Mensajería</h2>
+                    <p>
+                        En construcción ... <br>
+                        <a href="#" class="read-more" title="Read More">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/tropical-beach_74190-188.jpg?w=1800&t=st=1687169672~exp=1687170272~hmac=b66f9b9c1e344cbfe6fe2e5f65e94ebb8d418dad2e2af2b892ad9ac60e9eb79c"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2><br>App Java ERP</h2>
+                    <p> <br> <br>
+                        En construcción ... <br>
+
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/pathway-middle-green-leafed-trees-with-sun-shining-through-branches_181624-4539.jpg?w=900&t=st=1687123477~exp=1687124077~hmac=6e8b1735a2cb25be79f248b6a3307a37a15b080dee114565d01704b97d432a80"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2> <br> App Java CRM</h2>
+                    <p>
+                        En construcción ...  <br>
+
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>            
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/beautiful-paradise-island-with-beach-sea_74190-1023.jpg?w=1800&t=st=1687169691~exp=1687170291~hmac=7a65a4e5b2eb374e94e17fd7fb2ab0d1b7b7aaf83078cd62ed5d0a84b66d5beb"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>App Java Salud Aragón</h2>
+                    <p>
+                        En construcción ... <br>
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/empty-wood-chair-table-outdoor-patio-with-beautiful-tropical-beach-sea_74190-9961.jpg?w=1800&t=st=1687169720~exp=1687170320~hmac=0a77994214a9019510f28af43dab452ada527e96585d6e7f563a09995598851e"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>Pagina web Portafolio</h2>
+                    <p>
+                        En construcción ... <br>
+
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/view-mountains-landscape-huesca_1398-5217.jpg?w=2000&t=st=1687169991~exp=1687170591~hmac=aa445998f8b6570cab3abc9d68853ab80ba944475fcbc05c70c6061f967ab9f7"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>App Java Bussiness</h2>
+                    <p>
+                        Financiación, ventas, gastos
+                        En construcción ... <br>
+
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>            
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/beautiful-shot-snowy-hill-surrounded-by-mountains-with-light-pink-sky_181624-4102.jpg?w=2000&t=st=1687169963~exp=1687170563~hmac=b811dc16315ec7776b847588539208c1d57e43df80f7319aeb9b55ed7322784b"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>App control de existencias</h2>
+                    <p>
+                        Focalizado en ventas y compras productos almacén Ejemplo para Zara, Mercadona etc
+                        En construcción ... <br>
+
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+            <article>
+                <figure>
+                    <img
+                        src="https://img.freepik.com/free-photo/beautiful_1203-2633.jpg?w=2000&t=st=1687169925~exp=1687170525~hmac=4e1fdddf8ca048eaa100d431639d165f115cd16cea95feff591fbecdc3b28d4c"
+                        alt="Preview"
+                    >
+                </figure>
+                <div class="article-preview">
+                    <h2>Pagina web Empresa Cliente</h2>
+                    <p>
+                        En construcción ... <br>
+
+                        <a href="#" class="read-more">
+                            Read more
+                        </a>
+                    </p>
+                </div>
+            </article>
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    </section>
+    
+    <footer><p>&#169 Jorge Herraiz Soler</p></footer>
+    <script>
+        const body = document.body;
+        const progressBar = document.querySelector('.progress__bar');
+        console.log(progressBar)
+        const updateProgress = () => {
+            let scrollPos =
+                (window.scrollY / (body.scrollHeight - window.innerHeight)) * 100;
+            console.log(scrollPos)
+            progressBar.style.width = `${scrollPos}%`;
+            requestAnimationFrame(updateProgress);
+        };
+
+        updateProgress()
+    </script>
+</body>
+</html>
