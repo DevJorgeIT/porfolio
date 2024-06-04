@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 :root{
-      --primary-colorFondo: rgb(8, 26, 39);
+      --primary-colorFondo: rgb(10, 33, 50);
       --primary-color-Letras: white;
       --primary-color-FiguraIzquierda: white;
       --primary-color-IconosNav: rgb(2, 61, 110);
       --primary-color-SombraIconosNav: rgb(15, 15, 15);
+      --primary-color-cursorRadios: rgb(59, 70, 169);
+      --opacidadCursorRadios: 35%;
 
 }
 
@@ -14,9 +16,11 @@
 
     --primary-colorFondo: #fefefe;
     --primary-color-Letras: rgb(8, 26, 39);
-    --primary-color-FiguraIzquierda: rgb(0, 162, 255);
+    --primary-color-FiguraIzquierda: rgb(0, 183, 250);
     --primary-color-IconosNav: white;
     --primary-color-SombraIconosNav:  white;
+    --primary-color-cursorRadios: rgb(118, 222, 222);
+    --opacidadCursorRadios: 20%;
 }
 
 
@@ -105,6 +109,7 @@ body{
 
 .home-content{
     max-width: 700px;
+    z-index: 2;
 
 }
 
@@ -485,12 +490,14 @@ color:#081b29;
 footer{
     position: fixed;
     text-align: center;
+    display: block;
     width: 100%;
     height: 5%;
     bottom: 0px;
     left: 0%;
     color: white;
     background-color: rgb(6, 39, 80);
+    z-index: 10;
 }
 
 footer p{
@@ -505,6 +512,7 @@ footer p{
     left: 10px;
     width: 55px;
     display: block;
+    z-index: 3;
     
 }
 .containerNav a{
@@ -525,6 +533,7 @@ footer p{
     height: 100%;
     stroke: var(--primary-color-IconosNav);
     transition-duration: 0.3s;
+    z-index: 1;
 }
 
 
@@ -553,13 +562,15 @@ footer p{
 
 .formaIzquierda{
     position: fixed;
+    display: block;
     left:-200px;
     top: 10%;
     height: 70%;
     width: 20%;
-    display: flex;
     background-color: var(--primary-color-FiguraIzquierda);
     clip-path: polygon(40% 2%, 72% 28%, 72% 70%, 40% 94%);
+    z-index: 1;
+
 }
 
 .formaDerecha{
@@ -574,20 +585,29 @@ footer p{
 }
 
 .seccionesNav{
+    position: absolute;
     width: 70%;
     margin-bottom: 40px;
     margin-left: 10%;
     margin-bottom: 4%;
+    display: block;
+    z-index: 2;
+  
 }
+
+
+
 
 .titulos{
     font-size: 50px;
     color: var(--primary-color-Letras);
+  
 }
 
 .parrafos{
     margin-left: 10%;
     color: var(--primary-color-Letras);
+   
 }
 
 .articles {
@@ -602,6 +622,7 @@ footer p{
     font-family: Mulish;
     font-size: 16px;
     color: black;
+    z-index: 2;
 }
  
 .articles article {
@@ -617,7 +638,7 @@ footer p{
     -moz-border-radius: 20px 20px 20px 20px ;
     -ms-border-radius: 20px 20px 20px 20px ;
     -o-border-radius: 20px 20px 20px 20px ;
-    
+    z-index: 2;
 }
 
 .articles article a {
@@ -711,6 +732,15 @@ footer p{
 
 
 
+
+#ventanaGrande{
+    position: fixed;
+    background-color: white;
+    margin: 0 auto;
+    width: 70%;
+    height: 60%;
+}
+
 /* ----------------- Custom scrollbar-------------------------*/
 /*
 ::-webkit-scrollbar{
@@ -782,11 +812,82 @@ footer p{
     cursor: pointer;
 }
 
-#lineaSeparadora{
-    margin-left:-12%;
-    z-index:2;
+
+.light{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--x) var(--y), var(--primary-color-cursorRadios) 20% ,  transparent var(--opacidadCursorRadios));
+    filter: blur(150px);
+    -webkit-filter: blur(150px);
+    opacity: 20%;
+    z-index: 0;
 }
 
 
 
+.modal-container{
+    display: flex;
+    background-color: rgba(0,0,0, 0.3);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 50;
+}
 
+.show{
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.modal{
+    display:block;
+    position: fixed;
+    background-color: #ffff;
+    width: 900px;
+    max-width: 100%;
+    padding: 30px 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 50;
+    color: black;
+}
+
+
+.modal h1{
+    margin: 1em;
+}
+
+.modal p{
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+button{
+    background-color: #0072ff;
+    border: 0;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #ffff;
+    font-size: 14px;
+    padding: 10px 25px;
+    margin-top: 30px;
+}
