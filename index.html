@@ -16,6 +16,7 @@
             href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
             rel="stylesheet"
     >
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 
 <body>
@@ -155,7 +156,7 @@
                 <span class="text">Experience</span>
             </a></div>
         <!-- Cursos -->
-        <div class="elementos"><a href="#">
+        <div class="elementos"><a href="#contenedorSeccionesCCI">
                 <svg class="icon" viewBox="0 0 64 64" id="Layer_1_1_" version="1.1" xml:space="preserve"
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -215,14 +216,33 @@
     <formaMovil class="formaMovil slide-in-bck-bottom"></formaMovil>
 
 
-    <!--  <formaDerecha class="formaDerecha"></formaDerecha>  -->
-
     <section class="home fade-in-bottom">
+        
         <div class="global-section-Home">
             <div class="home-content">
-                <h1>Hello, I am Jorge Herraiz</h1>
-                <h3>IT Technician</h3>
-                <p>I am currently studying the 1st year of the Higher Degree in Multiplatform Applications
+                <div class="containerTextH1">
+                    <div>
+                        <h1 id="textH1">Hello  
+                            <div class="listaTextH1">
+                                <div class="itemTextH1">
+                                     world !
+                                </div>
+                                <div class="itemTextH1">
+                                    recruiter!
+                               </div>
+                                <div class="itemTextH1">
+                                     everybody!
+                                </div>
+                            </div>
+                        </h1>
+                    </div>
+                </div>
+                <div class="containerH3">
+                    <span class="text first-text">IT Technician</span>
+                    <span class="text sec-text">Developer</span>
+                    <span class="text third-text">Content creator</span>
+                </div>
+                <p>I am George Herraiz Soler, currently studying the 1st year of the Higher Degree in Multiplatform Applications
                     Development at C.P.I.F.P. Los Enlaces. <br> <br>
                     My goal as a student is to know and understand both the ecosystem of development of solutions,
                     structures and documentation in a business environment of products and the problems they have as
@@ -644,7 +664,7 @@
                         </ul>
                         <div class="action-buttonsCCI">
                             <a href="https://www.udemy.com/certificate/UC-23dc1609-28d5-41b6-b0c0-6caee2c94ae4/" target="_blank">
-                                Badge or Certification
+                                Certification
                             </a>
                             <a href="https://www.udemy.com/course/master-en-css-responsive-sass-flexbox-grid-y-boostrap-4/?couponCode=ACCAGE0923" target="_blank" class="secondaryCCI">
                                 Learn More
@@ -889,7 +909,7 @@
         const updateProgress = () =>
         {
             let scrollPos =
-                (window.scrollY / (body.scrollHeight + window.innerHeight)) * 100;
+                (window.scrollY / (body.scrollHeight + window.innerHeight)) * 130;
             console.log(scrollPos)
             progressBar.style.width = `${scrollPos}%`;
             requestAnimationFrame(updateProgress);
