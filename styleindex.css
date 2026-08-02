@@ -182,7 +182,7 @@ body.preload-lock {
     background:
         radial-gradient(820px circle at 18% 20%, rgba(74, 139, 212, 0.24) 0%, rgba(74, 139, 212, 0) 62%),
         radial-gradient(980px circle at 84% 76%, rgba(24, 91, 163, 0.22) 0%, rgba(24, 91, 163, 0) 64%),
-        linear-gradient(160deg, rgba(6, 20, 34, 0.98) 0%, rgba(8, 23, 39, 0.98) 100%);
+        linear-gradient(160deg, rgb(6, 20, 34) 0%, rgb(8, 23, 39) 100%);
 }
 
 .startup-loader-panel {
@@ -191,10 +191,8 @@ body.preload-lock {
     padding: 2rem 2.2rem 1.8rem;
     border-radius: 20px;
     border: 1px solid rgba(129, 188, 245, 0.32);
-    background: linear-gradient(145deg, rgba(12, 38, 61, 0.84) 0%, rgba(8, 28, 47, 0.84) 100%);
+    background: linear-gradient(145deg, rgb(12, 38, 61) 0%, rgb(8, 28, 47) 100%);
     box-shadow: 0 22px 56px rgba(1, 10, 20, 0.52), inset 0 1px 0 rgba(215, 238, 255, 0.22);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
     text-align: center;
     overflow: hidden;
 }
@@ -270,12 +268,12 @@ body.preload-lock {
     background:
         radial-gradient(900px circle at 14% 18%, rgba(120, 180, 232, 0.26) 0%, rgba(120, 180, 232, 0) 64%),
         radial-gradient(960px circle at 84% 80%, rgba(106, 164, 219, 0.24) 0%, rgba(106, 164, 219, 0) 64%),
-        linear-gradient(160deg, rgba(235, 243, 252, 0.98) 0%, rgba(226, 238, 249, 0.98) 100%);
+        linear-gradient(160deg, rgb(235, 243, 252) 0%, rgb(226, 238, 249) 100%);
 }
 
 .startup-loader.is-light .startup-loader-panel {
     border-color: rgba(87, 147, 205, 0.36);
-    background: linear-gradient(145deg, rgba(243, 249, 255, 0.93) 0%, rgba(234, 244, 253, 0.93) 100%);
+    background: linear-gradient(145deg, rgb(243, 249, 255) 0%, rgb(234, 244, 253) 100%);
     box-shadow: 0 20px 46px rgba(71, 117, 162, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
