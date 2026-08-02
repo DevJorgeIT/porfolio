@@ -2775,6 +2775,17 @@ let startX, startY, currentX, currentY;
 let imageX = 0,
   imageY = 0;
 
+function openProjectModal(contentHTML) {
+  modalContent.innerHTML = contentHTML;
+  modalContainer.classList.add("show");
+  document.body.classList.add("modal-open");
+}
+
+function closeProjectModal() {
+  modalContainer.classList.remove("show");
+  document.body.classList.remove("modal-open");
+}
+
 // 3. Manejador de eventos para abrir el modal
 articlesContainer.addEventListener("click", (event) => {
   const projectCard = event.target.closest(".project-card");
@@ -2784,72 +2795,78 @@ articlesContainer.addEventListener("click", (event) => {
     const projectData = projectsData[projectId];
 
     if (projectData) {
-      let contentHTML = "";
+      const lang = projectId.includes("_en") ? "en" : "es";
+      let modalBodyHTML = "";
+      let modalFooterHTML = "";
 
       // Lógica para la imagen principal y las adjuntas
       if (projectData.images && projectData.images.length > 0) {
-        contentHTML += `
+        modalBodyHTML += `
           <div class="modal-image-top">
             <img src="${projectData.images[0]}" alt="${projectData.title}" class="modal-project-image">
           </div>`;
       }
 
-      contentHTML += `<h2>${projectData.title}</h2>`;
-      contentHTML += `<div class="modal-body">${projectData.content}</div>`;
+      modalBodyHTML += `<h2>${projectData.title}</h2>`;
+      modalBodyHTML += `<div class="modal-body">${projectData.content}</div>`;
 
       // Añade los "chips" de aptitudes si existen
       if (projectData.skills && projectData.skills.length > 0) {
-        const lang = projectId.includes("_en") ? "en" : "es";
-
         if (lang === "es") {
-          contentHTML += `<h4>Aptitudes Clave</h4>`;
+          modalBodyHTML += `<h4>Aptitudes Clave</h4>`;
         } else {
-          contentHTML += `<h4>Key Skills</h4>`;
+          modalBodyHTML += `<h4>Key Skills</h4>`;
         }
 
-        contentHTML += `<div class="project-skills">`;
+        modalBodyHTML += `<div class="project-skills">`;
         projectData.skills.forEach((skill) => {
-          contentHTML += `<span class="skill-chip">${skill}</span>`;
+          modalBodyHTML += `<span class="skill-chip">${skill}</span>`;
         });
-        contentHTML += `</div>`;
+        modalBodyHTML += `</div>`;
       }
 
       // Añade imágenes adjuntas si hay más de una
       if (projectData.images && projectData.images.length > 1) {
-        contentHTML += `<div class="project-images">`;
+        modalBodyHTML += `<div class="project-images">`;
         for (let i = 1; i < projectData.images.length; i++) {
-          contentHTML += `<img src="${projectData.images[i]}" alt="${projectData.title}" class="modal-project-image">`;
+          modalBodyHTML += `<img src="${projectData.images[i]}" alt="${projectData.title}" class="modal-project-image">`;
         }
-        contentHTML += `</div>`;
+        modalBodyHTML += `</div>`;
       }
 
-      // Añade los enlaces si existen
+      // Añade los enlaces al footer fijo si existen
       if (projectData.links) {
-        const lang = projectId.includes("_en") ? "en" : "es";
-        contentHTML += `<div class="project-links">`;
+        modalFooterHTML += `<div class="project-links">`;
 
         if (projectData.links.github) {
-          contentHTML += `<a href="${
+          modalFooterHTML += `<a href="${
             projectData.links.github
-          }" target="_blank" class="link-button">${
+          }" target="_blank" rel="noopener noreferrer" class="link-button">${
             lang === "es" ? "Ver en GitHub" : "View on GitHub"
           }</a>`;
         }
 
         if (projectData.links.linkedin) {
-          contentHTML += `<a href="${
+          modalFooterHTML += `<a href="${
             projectData.links.linkedin
-          }" target="_blank" class="link-button">${
+          }" target="_blank" rel="noopener noreferrer" class="link-button">${
             lang === "es" ? "Ver en LinkedIn" : "View on LinkedIn"
           }</a>`;
         }
 
-        contentHTML += `</div>`;
+        modalFooterHTML += `</div>`;
       }
 
-      contentHTML += `<button class="botonClose" id="close-modal">X</button>`;
-      modalContent.innerHTML = contentHTML;
-      modalContainer.classList.add("show");
+      const closeLabel = lang === "es" ? "Cerrar modal" : "Close modal";
+      const contentHTML = `
+        <div class="modal-header">
+          <button class="botonClose" id="close-modal" aria-label="${closeLabel}">×</button>
+        </div>
+        <div class="modal-scroll">${modalBodyHTML}</div>
+        <div class="modal-footer">${modalFooterHTML}</div>
+      `;
+
+      openProjectModal(contentHTML);
     }
   }
 });
@@ -2860,7 +2877,7 @@ modalContainer.addEventListener("click", (event) => {
     event.target.id === "close-modal" ||
     event.target.id === "modal-container"
   ) {
-    modalContainer.classList.remove("show");
+    closeProjectModal();
   }
 });
 // Lógica para el visor de imágenes (Sección modificada)
@@ -2939,6 +2956,14 @@ document.addEventListener("keydown", (event) => {
   ) {
     closeFullscreenImageViewer();
   }
+
+  if (
+    event.key === "Escape" &&
+    modalContainer.classList.contains("show") &&
+    !fullscreenImageViewer.classList.contains("active")
+  ) {
+    closeProjectModal();
+  }
 });
 
 // Funciones del visor
@@ -2956,7 +2981,9 @@ function openFullscreenImageViewer(imageSrc) {
 
 function closeFullscreenImageViewer() {
   fullscreenImageViewer.classList.remove("active");
-  document.body.style.overflow = "";
+  if (!document.body.classList.contains("modal-open")) {
+    document.body.style.overflow = "";
+  }
 }
 
 // Baja el z-index de #herramientas cuando el menú móvil está abierto
@@ -2972,3 +2999,741 @@ if (mobileNavSelect && herramientasEl) {
     herramientasEl.style.zIndex = "1200";
   });
 }
+
+// Responsive tools panel: one toggle button on mobile, vertical tools on desktop.
+(function () {
+  const toolsContainer = document.getElementById("herramientas");
+  const toggleButton = document.getElementById("tools-toggle-btn");
+  if (!toolsContainer || !toggleButton) return;
+
+  const mobileQuery = window.matchMedia("(max-width: 420px)");
+  const isEnglish = document.documentElement.lang === "en";
+  const openText = isEnglish ? "Open tools" : "Abrir herramientas";
+  const closeText = isEnglish ? "Close tools" : "Cerrar herramientas";
+  const hintText = isEnglish ? "Open or close tools" : "Abrir o cerrar herramientas";
+
+  toggleButton.setAttribute("aria-label", openText);
+  toggleButton.title = openText;
+
+  function setToggleIcon(isOpen) {
+    toggleButton.innerHTML = isOpen
+      ? `<i class='bx bx-x' aria-hidden='true'></i><span class='visually-hidden'>${closeText}</span>`
+      : `<i class='bx bx-slider-alt' aria-hidden='true'></i><span class='visually-hidden'>${hintText}</span>`;
+    toggleButton.setAttribute("aria-expanded", String(isOpen));
+    toggleButton.setAttribute("aria-label", isOpen ? closeText : openText);
+    toggleButton.title = isOpen ? closeText : openText;
+  }
+
+  function syncToolsLayout() {
+    const isMobile = mobileQuery.matches;
+    if (!isMobile) {
+      toolsContainer.classList.remove("tools-collapsed");
+      toolsContainer.classList.add("tools-open");
+      setToggleIcon(false);
+      return;
+    }
+
+    const isOpen = toolsContainer.classList.contains("tools-open");
+    if (!isOpen) {
+      toolsContainer.classList.add("tools-collapsed");
+      setToggleIcon(false);
+      return;
+    }
+
+    toolsContainer.classList.remove("tools-collapsed");
+    setToggleIcon(true);
+  }
+
+  toggleButton.addEventListener("click", function () {
+    const isOpen = toolsContainer.classList.toggle("tools-open");
+    toolsContainer.classList.toggle("tools-collapsed", !isOpen);
+    setToggleIcon(isOpen);
+  });
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", syncToolsLayout);
+  } else if (typeof mobileQuery.addListener === "function") {
+    mobileQuery.addListener(syncToolsLayout);
+  }
+
+  toolsContainer.classList.remove("tools-open");
+  toolsContainer.classList.add("tools-collapsed");
+  syncToolsLayout();
+})();
+
+// Sidebar drawer for mobile/tablet: toggles the desktop nav with a menu button.
+(function () {
+  const sidebar = document.querySelector(".containerNav.desktop-nav");
+  if (!sidebar) return;
+
+  const tabletQuery = window.matchMedia("(max-width: 1100px)");
+
+  const toggleBtn = document.createElement("button");
+  toggleBtn.id = "mobile-sidebar-toggle";
+  toggleBtn.type = "button";
+  toggleBtn.setAttribute("aria-label", "Abrir menu de navegacion");
+  toggleBtn.setAttribute("aria-expanded", "false");
+  toggleBtn.innerHTML = "<i class='bx bx-menu' aria-hidden='true'></i>";
+
+  const backdrop = document.createElement("div");
+  backdrop.id = "mobile-sidebar-backdrop";
+  backdrop.setAttribute("aria-hidden", "true");
+
+  document.body.appendChild(toggleBtn);
+  document.body.appendChild(backdrop);
+
+  function setOpenState(isOpen) {
+    document.body.classList.toggle("mobile-sidebar-open", isOpen);
+    toggleBtn.setAttribute("aria-expanded", String(isOpen));
+    toggleBtn.setAttribute(
+      "aria-label",
+      isOpen ? "Cerrar menu de navegacion" : "Abrir menu de navegacion"
+    );
+    toggleBtn.innerHTML = isOpen
+      ? "<i class='bx bx-x' aria-hidden='true'></i>"
+      : "<i class='bx bx-menu' aria-hidden='true'></i>";
+  }
+
+  function syncByViewport() {
+    const isTabletOrMobile = tabletQuery.matches;
+    toggleBtn.style.display = isTabletOrMobile ? "inline-flex" : "none";
+    backdrop.style.display = isTabletOrMobile ? "block" : "none";
+    if (!isTabletOrMobile) {
+      setOpenState(false);
+      return;
+    }
+
+    setOpenState(false);
+  }
+
+  toggleBtn.addEventListener("click", function () {
+    const nextOpen = !document.body.classList.contains("mobile-sidebar-open");
+    setOpenState(nextOpen);
+  });
+
+  backdrop.addEventListener("click", function () {
+    setOpenState(false);
+  });
+
+  sidebar.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", function () {
+      if (tabletQuery.matches) {
+        setOpenState(false);
+      }
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      setOpenState(false);
+    }
+  });
+
+  if (typeof tabletQuery.addEventListener === "function") {
+    tabletQuery.addEventListener("change", syncByViewport);
+  } else if (typeof tabletQuery.addListener === "function") {
+    tabletQuery.addListener(syncByViewport);
+  }
+
+  syncByViewport();
+})();
+
+// Global text size controls with proportional scaling and persistence.
+(function () {
+  const decreaseButton = document.getElementById("font-size-decrease");
+  const resetButton = document.getElementById("font-size-reset");
+  const increaseButton = document.getElementById("font-size-increase");
+  const statusLabel = document.getElementById("font-size-status");
+
+  if (!decreaseButton || !resetButton || !increaseButton) return;
+
+  const STORAGE_KEY = "portfolio-font-scale";
+  const SCALE_CONFIG = {
+    min: 0.85,
+    max: 1.3,
+    step: 0.05,
+    defaultValue: 1,
+  };
+
+  function clampScale(value) {
+    return Math.min(SCALE_CONFIG.max, Math.max(SCALE_CONFIG.min, value));
+  }
+
+  function readScale() {
+    const rawValue = Number(window.localStorage.getItem(STORAGE_KEY));
+    if (!Number.isFinite(rawValue)) return SCALE_CONFIG.defaultValue;
+    return clampScale(rawValue);
+  }
+
+  function applyScale(scale) {
+    const safeScale = clampScale(scale);
+    document.documentElement.style.setProperty("--portfolio-font-scale", safeScale.toFixed(2));
+    if (statusLabel) {
+      statusLabel.textContent = `${Math.round(safeScale * 100)}%`;
+    }
+
+    decreaseButton.disabled = safeScale <= SCALE_CONFIG.min;
+    increaseButton.disabled = safeScale >= SCALE_CONFIG.max;
+  }
+
+  function saveAndApply(scale) {
+    const safeScale = clampScale(scale);
+    window.localStorage.setItem(STORAGE_KEY, String(safeScale));
+    applyScale(safeScale);
+  }
+
+  const initialScale = readScale();
+  applyScale(initialScale);
+
+  decreaseButton.addEventListener("click", function () {
+    saveAndApply(readScale() - SCALE_CONFIG.step);
+  });
+
+  increaseButton.addEventListener("click", function () {
+    saveAndApply(readScale() + SCALE_CONFIG.step);
+  });
+
+  resetButton.addEventListener("click", function () {
+    saveAndApply(SCALE_CONFIG.defaultValue);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (!(event.ctrlKey || event.metaKey)) return;
+
+    const target = event.target;
+    const isEditable =
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT");
+    if (isEditable) return;
+
+    const key = event.key;
+    const isPlus = key === "+" || key === "=";
+    const isMinus = key === "-" || key === "_";
+    const isReset = key === "0";
+
+    if (!isPlus && !isMinus && !isReset) return;
+
+    event.preventDefault();
+
+    if (isPlus) {
+      saveAndApply(readScale() + SCALE_CONFIG.step);
+      return;
+    }
+
+    if (isMinus) {
+      saveAndApply(readScale() - SCALE_CONFIG.step);
+      return;
+    }
+
+    saveAndApply(SCALE_CONFIG.defaultValue);
+  });
+})();
+
+// Desktop sidebar: highlight the current section while scrolling.
+(function () {
+  const desktopLinks = Array.from(
+    document.querySelectorAll(".containerNav.desktop-nav .elementos a[href^='#']")
+  );
+
+  if (!desktopLinks.length || !("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const sections = desktopLinks
+    .map((link) => {
+      const href = link.getAttribute("href");
+      if (!href || href === "#") return null;
+      const section = document.querySelector(href);
+      return section ? { link, section } : null;
+    })
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  function setActiveLink(activeLink) {
+    desktopLinks.forEach((link) => link.classList.remove("is-active"));
+    if (activeLink) activeLink.classList.add("is-active");
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (!visible.length) return;
+
+      const currentSection = visible[0].target;
+      const current = sections.find((item) => item.section === currentSection);
+      if (current) setActiveLink(current.link);
+    },
+    {
+      root: null,
+      rootMargin: "-18% 0px -62% 0px",
+      threshold: [0.15, 0.3, 0.55],
+    }
+  );
+
+  sections.forEach(({ section }) => observer.observe(section));
+
+  const firstActive = desktopLinks.find((link) => link.classList.contains("is-active"));
+  setActiveLink(firstActive || sections[0].link);
+})();
+
+// KPI count-up animation: starts when KPI section enters viewport.
+(function () {
+  const showcase = document.querySelector(".kpi-showcase");
+  if (!showcase) return;
+
+  const values = Array.from(showcase.querySelectorAll(".kpi-value"));
+  if (!values.length) return;
+
+  function animateNumericValue(el) {
+    const original = (el.textContent || "").trim();
+    const match = original.match(/^(.*?)(\d+)(.*)$/);
+    if (!match) return;
+
+    const prefix = match[1] || "";
+    const target = Number(match[2]);
+    const suffix = match[3] || "";
+    if (!Number.isFinite(target)) return;
+
+    const duration = 1400;
+    const start = performance.now();
+
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.max(0, Math.round(target * eased));
+      el.textContent = `${prefix}${current}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = original;
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  let hasRun = false;
+
+  function runAnimations() {
+    if (hasRun) return;
+    hasRun = true;
+    values.forEach((valueEl, index) => {
+      window.setTimeout(() => {
+        animateNumericValue(valueEl);
+      }, index * 120);
+    });
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    runAnimations();
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.some((entry) => entry.isIntersecting);
+      if (!visible) return;
+      runAnimations();
+      observer.disconnect();
+    },
+    {
+      root: null,
+      threshold: 0.3,
+    }
+  );
+
+  observer.observe(showcase);
+})();
+
+// Tab panels: animate list blocks when a panel becomes active.
+(function () {
+  const tabGroups = document.querySelectorAll("sl-tab-group.centered-tabs");
+  if (!tabGroups.length) return;
+
+  function activatePanel(group, panelName) {
+    const panels = Array.from(group.querySelectorAll("sl-tab-panel"));
+    if (!panels.length) return;
+
+    let targetPanel = null;
+    if (panelName) {
+      targetPanel = panels.find((panel) => panel.getAttribute("name") === panelName) || null;
+    }
+    if (!targetPanel) {
+      targetPanel = panels.find((panel) => panel.hasAttribute("active")) || panels[0];
+    }
+    if (!targetPanel) return;
+
+    panels.forEach((panel) => panel.classList.remove("panel-list-animate"));
+
+    const items = targetPanel.querySelectorAll(".subjects-list > li");
+    items.forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${index * 65}ms`);
+    });
+
+    requestAnimationFrame(() => {
+      targetPanel.classList.add("panel-list-animate");
+    });
+  }
+
+  tabGroups.forEach((group) => {
+    activatePanel(group);
+
+    group.addEventListener("sl-tab-show", (event) => {
+      const panelName = event?.detail?.name;
+      activatePanel(group, panelName);
+    });
+  });
+})();
+
+// Adds official logos to technology badges when an official brand icon is available.
+(function () {
+  const logoMap = {
+    "LangChain": ["langchain"],
+    "TensorFlow": ["tensorflow"],
+    "OpenAI / Gemini": ["openai", "googlegemini"],
+    "Java": ["openjdk"],
+    "C#": ["dotnet"],
+    "Python": ["python"],
+    "JavaScript": ["javascript"],
+    "TypeScript": ["typescript"],
+    "PHP": ["php"],
+    "Kotlin": ["kotlin"],
+    "R (Data Science)": ["r"],
+    "Spring / Spring Boot": ["springboot"],
+    ".NET 8": ["dotnet"],
+    "FastAPI": ["fastapi"],
+    "Django 5.0": ["django"],
+    "CodeIgniter 4": ["codeigniter"],
+    "Tomcat 7 / 9": ["apachetomcat"],
+    "SQL Server": ["microsoftsqlserver"],
+    "MySQL": ["mysql"],
+    "Oracle": ["oracle"],
+    "PostgreSQL": ["postgresql"],
+    "Supabase": ["supabase"],
+    "SQLite": ["sqlite"],
+    "MongoDB (NoSQL)": ["mongodb"],
+    "React": ["react"],
+    "Angular": ["angular"],
+    "Vue": ["vuedotjs"],
+    "Streamlit": ["streamlit"],
+    "Bootstrap": ["bootstrap"],
+    "jQuery / jqGrid": ["jquery"],
+    "Git / GitHub": ["git", "github"],
+    "GitHub DevOps": ["github", "azuredevops"],
+    "Docker / Microservicios": ["docker"],
+    "Portainer": ["portainer"],
+    "AWS / Azure": ["amazonaws", "microsoftazure"],
+    "Confluence": ["confluence"],
+    "ClickUp": ["clickup"],
+    "Postman / Swagger / Scalar": ["postman", "swagger"],
+    "IntelliJ / Visual Studio": ["intellijidea", "visualstudio"],
+    "Eclipse / NetBeans": ["eclipseide", "apachenetbeanside"],
+    "Maven": ["apachemaven"],
+    "JWT / SSL": ["jsonwebtokens", "letsencrypt"],
+    "Odoo": ["odoo"],
+    "n8n": ["n8n"],
+    "Twilio": ["twilio"],
+    "Salesforce": ["salesforce"],
+    "Thymeleaf": ["thymeleaf"]
+  };
+
+  const slugCdnOverrides = {
+    openai: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg",
+    amazonaws: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg",
+    microsoftazure: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg",
+  };
+
+  function getLogoUrl(slug) {
+    return slugCdnOverrides[slug] || `https://cdn.simpleicons.org/${slug}`;
+  }
+
+  const badges = document.querySelectorAll("#contenedorTecnologias.tech-premium .skill-list span");
+  if (!badges.length) return;
+
+  badges.forEach((badge) => {
+    if (badge.dataset.logoEnhanced === "true") return;
+
+    const badgeText = badge.textContent.replace(/\s+/g, " ").trim();
+    const logoSlugs = logoMap[badgeText];
+    if (!logoSlugs || !logoSlugs.length) return;
+
+    const iconWrap = document.createElement("span");
+    iconWrap.className = "tech-badge-icons";
+    iconWrap.setAttribute("aria-hidden", "true");
+
+    logoSlugs.forEach((slug) => {
+      const logo = document.createElement("img");
+      logo.src = getLogoUrl(slug);
+      logo.alt = "";
+      logo.loading = "lazy";
+      logo.decoding = "async";
+      logo.referrerPolicy = "no-referrer";
+      logo.addEventListener("error", () => {
+        if (logo.dataset.fallbackApplied === "true") return;
+        logo.dataset.fallbackApplied = "true";
+        logo.src = `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`;
+      });
+      iconWrap.appendChild(logo);
+    });
+
+    const textWrap = document.createElement("span");
+    textWrap.className = "tech-badge-text";
+    textWrap.textContent = badgeText;
+
+    badge.textContent = "";
+    badge.classList.add("tech-badge");
+    badge.appendChild(iconWrap);
+    badge.appendChild(textWrap);
+    badge.dataset.logoEnhanced = "true";
+  });
+})();
+
+// Tracks contact and social conversion clicks by channel and keeps lightweight local metrics.
+(function () {
+  const STORAGE_KEY = "portfolio-click-metrics";
+
+  function readMetrics() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { total: 0, channels: {}, lastEventAt: null };
+      const parsed = JSON.parse(raw);
+      const safeChannels = parsed && typeof parsed.channels === "object" && parsed.channels ? parsed.channels : {};
+      return {
+        total: Number(parsed?.total) || 0,
+        channels: safeChannels,
+        lastEventAt: parsed?.lastEventAt || null,
+      };
+    } catch (_error) {
+      return { total: 0, channels: {}, lastEventAt: null };
+    }
+  }
+
+  function saveMetrics(metrics) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(metrics));
+    } catch (_error) {
+      // Ignore storage write issues silently (private mode/full storage).
+    }
+  }
+
+  function trackChannel(channel) {
+    const normalized = (channel || "unknown").trim().toLowerCase();
+    const metrics = readMetrics();
+
+    metrics.total += 1;
+    metrics.channels[normalized] = (Number(metrics.channels[normalized]) || 0) + 1;
+    metrics.lastEventAt = new Date().toISOString();
+
+    saveMetrics(metrics);
+    document.dispatchEvent(new CustomEvent("portfolio:metrics-updated", { detail: metrics }));
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const trackedLink = target.closest("[data-track-click='true']");
+    if (!trackedLink) return;
+
+    const channel = trackedLink.getAttribute("data-track-channel") || "unknown";
+    trackChannel(channel);
+  });
+})();
+
+// Dev-only panel to inspect/export click metrics and open external metadata validators.
+(async function () {
+  const params = new URLSearchParams(window.location.search);
+  const isLocalhost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const isDevPanelEnabled = isLocalhost || params.get("dev") === "1";
+  if (!isDevPanelEnabled) return;
+
+  const STORAGE_KEY = "portfolio-click-metrics";
+
+  function readMetrics() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { total: 0, channels: {}, lastEventAt: null };
+      const parsed = JSON.parse(raw);
+      return {
+        total: Number(parsed?.total) || 0,
+        channels: parsed?.channels && typeof parsed.channels === "object" ? parsed.channels : {},
+        lastEventAt: parsed?.lastEventAt || null,
+      };
+    } catch (_error) {
+      return { total: 0, channels: {}, lastEventAt: null };
+    }
+  }
+
+  function downloadFile(content, fileName, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = fileName;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function toCsv(metrics) {
+    const rows = [["channel", "clicks"]];
+    Object.entries(metrics.channels || {})
+      .sort((a, b) => Number(b[1]) - Number(a[1]))
+      .forEach(([channel, count]) => rows.push([channel, String(count)]));
+    return rows.map((row) => row.join(",")).join("\n");
+  }
+
+  const panel = document.createElement("aside");
+  panel.className = "dev-metrics-panel";
+  panel.setAttribute("aria-label", "Developer conversion metrics panel");
+
+  const currentUrl = encodeURIComponent(window.location.href.split("?")[0]);
+
+  panel.innerHTML = `
+    <h4>Dev Metrics</h4>
+    <p class="dev-metrics-summary">Reading local key: <b>${STORAGE_KEY}</b></p>
+    <ul class="dev-metrics-list"></ul>
+    <div class="dev-metrics-actions">
+      <button type="button" data-dev-action="refresh">Refresh</button>
+      <button type="button" data-dev-action="export-json">Export JSON</button>
+      <button type="button" data-dev-action="export-csv">Export CSV</button>
+      <button type="button" data-dev-action="reset">Reset</button>
+    </div>
+    <div class="dev-metrics-validators">
+      <a href="https://search.google.com/test/rich-results?url=${currentUrl}" target="_blank" rel="noopener noreferrer">Rich Results Test</a>
+      <a href="https://developers.facebook.com/tools/debug/" target="_blank" rel="noopener noreferrer">Open Graph Debugger</a>
+    </div>
+  `;
+
+  document.body.appendChild(panel);
+
+  const list = panel.querySelector(".dev-metrics-list");
+  const summary = panel.querySelector(".dev-metrics-summary");
+
+  function renderMetrics() {
+    const metrics = readMetrics();
+    const items = Object.entries(metrics.channels || {})
+      .sort((a, b) => Number(b[1]) - Number(a[1]))
+      .map(([channel, count]) => `<li><span>${channel}</span><b>${count}</b></li>`)
+      .join("");
+
+    list.innerHTML = items || "<li><span>No data yet</span><b>0</b></li>";
+    summary.innerHTML = `Total clicks: <b>${metrics.total}</b>${metrics.lastEventAt ? ` · Last: ${new Date(metrics.lastEventAt).toLocaleString()}` : ""}`;
+  }
+
+  document.addEventListener("portfolio:metrics-updated", () => {
+    renderMetrics();
+  });
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === STORAGE_KEY) {
+      renderMetrics();
+    }
+  });
+
+  window.addEventListener("focus", () => {
+    renderMetrics();
+  });
+
+  panel.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    const action = target.getAttribute("data-dev-action");
+    if (!action) return;
+
+    if (action === "refresh") {
+      renderMetrics();
+      return;
+    }
+
+    if (action === "export-json") {
+      const metrics = readMetrics();
+      downloadFile(JSON.stringify(metrics, null, 2), "portfolio-click-metrics.json", "application/json");
+      return;
+    }
+
+    if (action === "export-csv") {
+      const metrics = readMetrics();
+      downloadFile(toCsv(metrics), "portfolio-click-metrics.csv", "text/csv;charset=utf-8");
+      return;
+    }
+
+    if (action === "reset") {
+      window.localStorage.removeItem(STORAGE_KEY);
+      renderMetrics();
+    }
+  });
+
+  renderMetrics();
+})();
+
+// Improves mobile performance by lazily decoding non-critical media below the fold.
+(function () {
+  const candidates = document.querySelectorAll(
+    "#proyectos img, .recommendation-avatar img, .unir-logo, .gallery-item img"
+  );
+  if (!candidates.length) return;
+
+  candidates.forEach((img) => {
+    if (img.getAttribute("loading") !== "lazy") {
+      img.setAttribute("loading", "lazy");
+    }
+    if (img.getAttribute("decoding") !== "async") {
+      img.setAttribute("decoding", "async");
+    }
+  });
+})();
+
+// Repositions hero profile card under heading/intro on medium widths.
+(function () {
+  const heroGrid = document.querySelector(".global-section-Home");
+  const homeContent = heroGrid?.querySelector(".home-content");
+  const heroCard = heroGrid?.querySelector(".hero-visual-card");
+  if (!heroGrid || !homeContent || !heroCard) return;
+
+  const cardBreakpoint = window.matchMedia("(max-width: 829px)");
+  const originMarker = document.createComment("hero-card-origin");
+  heroGrid.insertBefore(originMarker, heroCard);
+
+  function placeCard() {
+    if (cardBreakpoint.matches) {
+      document.body.classList.add("hero-card-inline");
+
+      const anchor =
+        homeContent.querySelector(".hero-intro") ||
+        homeContent.querySelector(".containerH3") ||
+        homeContent.firstElementChild;
+
+      if (anchor) {
+        anchor.insertAdjacentElement("afterend", heroCard);
+      } else {
+        homeContent.prepend(heroCard);
+      }
+      return;
+    }
+
+    document.body.classList.remove("hero-card-inline");
+
+    if (originMarker.parentNode) {
+      originMarker.parentNode.insertBefore(heroCard, originMarker.nextSibling);
+    }
+  }
+
+  placeCard();
+
+  if (typeof cardBreakpoint.addEventListener === "function") {
+    cardBreakpoint.addEventListener("change", placeCard);
+  } else if (typeof cardBreakpoint.addListener === "function") {
+    cardBreakpoint.addListener(placeCard);
+  }
+})();
