@@ -1715,14 +1715,21 @@ body.modal-open {
     overscroll-behavior: none;
 }
 
+body.modal-open footer,
+body.modal-open #footer {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 #modal-container.modal-container {
     position: fixed;
     inset: 0;
     display: grid;
     place-items: center;
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.56);
-    z-index: 2100;
+    background-color: rgba(5, 14, 26, 0.92);
+    z-index: 5000;
 }
 
 #modal-container .modal {
