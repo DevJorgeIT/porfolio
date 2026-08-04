@@ -3655,6 +3655,16 @@ if (mobileNavSelect && herramientasEl) {
   const tabGroups = document.querySelectorAll("sl-tab-group.centered-tabs");
   if (!tabGroups.length) return;
 
+  function replayClass(target, className, durationMs) {
+    if (!target) return;
+    target.classList.remove(className);
+    void target.offsetWidth;
+    target.classList.add(className);
+    window.setTimeout(() => {
+      target.classList.remove(className);
+    }, durationMs);
+  }
+
   function activatePanel(group, panelName) {
     const panels = Array.from(group.querySelectorAll("sl-tab-panel"));
     if (!panels.length) return;
@@ -3668,7 +3678,14 @@ if (mobileNavSelect && herramientasEl) {
     }
     if (!targetPanel) return;
 
+    const targetIndex = panels.indexOf(targetPanel);
+    const previousIndexRaw = group.getAttribute("data-active-panel-index");
+    const previousIndex = previousIndexRaw === null ? targetIndex : Number(previousIndexRaw);
+    const direction = targetIndex >= previousIndex ? "forward" : "backward";
+    group.setAttribute("data-active-panel-index", String(targetIndex));
+
     panels.forEach((panel) => panel.classList.remove("panel-list-animate"));
+    panels.forEach((panel) => panel.classList.remove("panel-switch-forward", "panel-switch-backward"));
 
     const items = targetPanel.querySelectorAll(".subjects-list > li");
     items.forEach((item, index) => {
@@ -3677,7 +3694,14 @@ if (mobileNavSelect && herramientasEl) {
 
     requestAnimationFrame(() => {
       targetPanel.classList.add("panel-list-animate");
+      replayClass(targetPanel, "panel-switch-animate", 520);
+      replayClass(targetPanel, direction === "forward" ? "panel-switch-forward" : "panel-switch-backward", 520);
     });
+
+    const activeTab = panelName
+      ? group.querySelector(`sl-tab[panel="${panelName}"]`)
+      : group.querySelector('sl-tab[active], sl-tab[aria-selected="true"]');
+    replayClass(activeTab, "tab-switch-animate", 380);
   }
 
   tabGroups.forEach((group) => {
@@ -3998,7 +4022,7 @@ if (mobileNavSelect && herramientasEl) {
   const heroCard = heroGrid?.querySelector(".hero-visual-card");
   if (!heroGrid || !homeContent || !heroCard) return;
 
-  const cardBreakpoint = window.matchMedia("(max-width: 829px)");
+  const cardBreakpoint = window.matchMedia("(max-width: 1180px)");
   const originMarker = document.createComment("hero-card-origin");
   heroGrid.insertBefore(originMarker, heroCard);
 
