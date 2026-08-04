@@ -7448,7 +7448,6 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
         border-color: transparent;
     }
 
-    .light_theme .hero-tech-pill img[alt="Dokploy"],
     .light_theme .hero-tech-pill img[alt="NumPy"],
     .light_theme .hero-tech-pill img[alt="Pandas"],
     .light_theme .hero-tech-pill img[alt="FAISS"],
@@ -7457,6 +7456,12 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
         background: rgba(255, 255, 255, 0.96);
         border-color: rgba(128, 164, 194, 0.16);
         box-shadow: inset 0 0 0 1px rgba(128, 164, 194, 0.12);
+    }
+
+    .light_theme .hero-tech-pill img[alt="Dokploy"] {
+        background: linear-gradient(145deg, rgba(35, 78, 119, 0.98) 0%, rgba(25, 61, 95, 0.99) 100%);
+        border-color: rgba(20, 49, 79, 0.34);
+        box-shadow: inset 0 1px 0 rgba(145, 187, 226, 0.28), 0 1px 3px rgba(22, 47, 75, 0.3);
     }
 
     .light_theme .hero-tech-pill i.bx-database {
