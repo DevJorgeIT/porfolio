@@ -3596,6 +3596,11 @@ sl-tab-panel[name="bigdata_ia"] .info-panel {
   background-image: url('./Media/AI-big-data.jpg');
 }
 
+/* Estilos para el panel UNIR */
+sl-tab-panel[name="ciberseguridad_unir"] .info-panel {
+    background-image: url('./Media/imagen-Unir.jpg');
+}
+
 /* Estilos para los nuevos paneles de investigación IA/Big Data */
 sl-tab-panel[name="investigacion_ia_bigdata"] .info-panel,
 sl-tab-panel[name="researcher_ai_bigdata"] .info-panel {
@@ -4269,12 +4274,27 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
     box-shadow: 0 4px 10px rgba(42, 58, 74, 0.1);
 }
 
+.light_theme #contenedorSeccionesExperiencia .subjects-list > li {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 249, 253, 0.9) 100%);
+    border-color: rgba(128, 151, 173, 0.4);
+    color: #1d3a52;
+    box-shadow: 0 4px 10px rgba(42, 58, 74, 0.1);
+}
+
 .light_theme .subjects-list > li::before {
     color: #2f5a7d;
     text-shadow: none;
 }
 
+.light_theme #contenedorSeccionesExperiencia .subjects-list > li::before {
+    color: #2f5a7d;
+}
+
 .light_theme .subjects-list > li > ul > li::before {
+    color: #355f82;
+}
+
+.light_theme #contenedorSeccionesExperiencia .subjects-list > li > ul > li::before {
     color: #355f82;
 }
 
@@ -4282,26 +4302,28 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
 .light_theme #contenedorSeccionesExperiencia .panel-title {
     display: inline-block;
     max-width: 100%;
-    color: #111f2d;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(247, 251, 254, 0.84) 100%);
-    border: 1px solid rgba(140, 160, 178, 0.52);
-    box-shadow: 0 5px 12px rgba(44, 60, 77, 0.12);
+    color: #f3f8fd;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
     border-radius: 10px;
     padding: 0.18rem 0.74rem;
     font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
 .light_theme #contenedorSeccionesAcademicas .panel-title_Medio,
 .light_theme #contenedorSeccionesExperiencia .panel-title_Medio {
     display: inline-block;
     max-width: 100%;
-    color: #152b3f;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.88) 0%, rgba(247, 251, 254, 0.82) 100%);
-    border: 1px solid rgba(140, 160, 178, 0.48);
-    box-shadow: 0 4px 10px rgba(44, 60, 77, 0.1);
+    color: #f3f8fd;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
     border-radius: 10px;
     padding: 0.14rem 0.66rem;
     font-weight: 760;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
 }
 
 .light_theme #contenedorSeccionesAcademicas .panel-subtitle,
@@ -4312,7 +4334,7 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
 .light_theme #contenedorSeccionesExperiencia .panel-content,
 .light_theme #contenedorSeccionesAcademicas .panel-content span,
 .light_theme #contenedorSeccionesExperiencia .panel-content span {
-    color: #1b3449;
+    color: #f3f8fd;
     text-shadow: none;
     font-weight: 620;
 }
@@ -4322,8 +4344,9 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
     display: inline-block;
     padding: 0.2rem 0.64rem;
     border-radius: 9px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.86) 0%, rgba(247, 251, 254, 0.82) 100%);
-    border: 1px solid rgba(140, 160, 178, 0.44);
+    background: transparent;
+    border: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .light_theme #contenedorSeccionesAcademicas .panel-content > p,
