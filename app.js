@@ -2963,6 +2963,10 @@ function buildContactModalHTML(templateKey) {
   const template = buildContactTemplate(templateKey, lang);
   const subjectValue = buildContactSubject(templateKey, lang);
   const selected = (value) => (templateKey === value ? "selected" : "");
+  const recipientLabel = lang === "es" ? "Destinatario" : "Recipient";
+  const secureDraftLabel = lang === "es" ? "Borrador seguro" : "Secure draft";
+  const preparedLabel = lang === "es" ? "Preparado para enviar" : "Ready to send";
+  const profileLabel = lang === "es" ? "Respuesta profesional" : "Professional reply";
 
   return `
     <div class="modal-header">
@@ -2972,6 +2976,20 @@ function buildContactModalHTML(templateKey) {
       <p class="contact-modal-kicker">${template.kicker}</p>
       <h2>${template.title}</h2>
       <p class="contact-modal-intro">${template.intro}</p>
+      <div class="contact-modal-summary" aria-label="${lang === "es" ? "Resumen del borrador" : "Draft summary"}">
+        <div class="contact-modal-summary-chip contact-modal-summary-chip-primary">
+          <span>${secureDraftLabel}</span>
+          <strong>${preparedLabel}</strong>
+        </div>
+        <div class="contact-modal-summary-chip">
+          <span>${recipientLabel}</span>
+          <strong>jorgeherraizsoler@gmail.com</strong>
+        </div>
+        <div class="contact-modal-summary-chip">
+          <span>${profileLabel}</span>
+          <strong>${lang === "es" ? "Datos + asunto + mensaje" : "Data + subject + message"}</strong>
+        </div>
+      </div>
       <form id="contact-form" class="contact-modal-form">
         <div class="contact-form-grid">
           <label class="contact-field">
