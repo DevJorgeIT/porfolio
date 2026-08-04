@@ -64,6 +64,7 @@
 html {
 	scroll-behavior: smooth;
     font-size: calc(100% * var(--portfolio-font-scale));
+    overflow-x: hidden;
 }
 #bar{
     position: fixed;
@@ -7149,7 +7150,16 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
     }
 
     body.mobile-sidebar-open {
-        overflow: hidden;
+        overflow: hidden !important;
+        overscroll-behavior: none;
+        touch-action: none;
+        height: 100%;
+    }
+
+    html.mobile-sidebar-open-root {
+        overflow: hidden !important;
+        overscroll-behavior: none;
+        height: 100%;
     }
 
     .home {
@@ -7205,9 +7215,10 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
         position: static !important;
         left: auto !important;
         right: auto !important;
-        width: 100% !important;
+        width: calc(100% - 2.2rem) !important;
         margin: 1rem 1.1rem 0 !important;
         border-radius: 0 !important;
+        box-sizing: border-box;
     }
 
     .light_theme #mobile-sidebar-toggle {
@@ -7243,6 +7254,55 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
 
 
 @media (max-width: 420px) {
+    .hero-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.42rem;
+        padding: 0.42rem;
+    }
+
+    .hero-metric {
+        border-right: 0;
+        border-bottom: 1px solid rgba(103, 156, 214, 0.26);
+        padding: 0.38rem 0.28rem 0.45rem;
+    }
+
+    .hero-metric:nth-last-child(-n+2) {
+        border-bottom: 0;
+    }
+
+    .hero-metric:last-child {
+        grid-column: 1 / -1;
+        border-bottom: 0;
+    }
+
+    .hero-metric i {
+        font-size: 1.18rem;
+    }
+
+    .hero-metric em {
+        min-height: 0;
+        font-size: 0.66rem;
+        line-height: 1.2;
+    }
+
+    .hero-metric strong {
+        font-size: 1.7rem;
+    }
+
+    .hero-metric small {
+        font-size: 0.65rem;
+        line-height: 1.2;
+    }
+
+    .hero-role-row {
+        grid-template-columns: 1fr;
+        gap: 0.28rem;
+    }
+
+    .hero-role-row ul {
+        gap: 0.28rem;
+    }
+
     #herramientas {
         min-height: 0 !important;
         height: auto !important;
@@ -7258,6 +7318,7 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
         gap: 0.42rem !important;
         padding: 0.34rem !important;
         z-index: 1600 !important;
+        max-width: calc(100vw - 20px) !important;
     }
 
     #tools-toggle-btn {

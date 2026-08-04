@@ -3083,6 +3083,10 @@ if (mobileNavSelect && herramientasEl) {
   document.body.appendChild(backdrop);
 
   function setOpenState(isOpen) {
+    document.documentElement.classList.toggle(
+      "mobile-sidebar-open-root",
+      isOpen
+    );
     document.body.classList.toggle("mobile-sidebar-open", isOpen);
     toggleBtn.setAttribute("aria-expanded", String(isOpen));
     toggleBtn.setAttribute(
