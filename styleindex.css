@@ -7785,50 +7785,106 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
     }
 
     .light_theme[data-card-style="marble-executive"] .hero-visual-card {
-        border-color: rgba(108, 165, 218, 0.3);
+        border-color: rgba(128, 159, 194, 0.34);
         background:
-            radial-gradient(130% 108% at 12% -10%, rgba(164, 203, 236, 0.22) 0%, rgba(164, 203, 236, 0) 48%),
-            linear-gradient(162deg, rgba(239, 248, 255, 0.98) 0%, rgba(231, 242, 252, 0.99) 100%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94), inset 0 -1px 0 rgba(133, 176, 211, 0.28), 0 16px 28px rgba(90, 132, 168, 0.19);
+            radial-gradient(132% 110% at 12% -10%, rgba(242, 247, 253, 0.44) 0%, rgba(242, 247, 253, 0) 52%),
+            conic-gradient(from 208deg at 90% 14%, rgba(129, 161, 196, 0.14) 0deg, rgba(129, 161, 196, 0) 76deg, rgba(108, 138, 172, 0.12) 132deg, rgba(129, 161, 196, 0) 360deg),
+            linear-gradient(162deg, rgba(255, 255, 255, 0.99) 0%, rgba(245, 249, 253, 0.99) 100%);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.98),
+            inset 0 -1px 0 rgba(126, 159, 194, 0.24),
+            0 20px 34px rgba(58, 86, 120, 0.2),
+            0 0 0 1px rgba(161, 191, 223, 0.2);
     }
 
     .light_theme[data-card-style="marble-executive"] .hero-visual-card::after {
-        opacity: 0.22;
+        opacity: 0.42;
         mix-blend-mode: multiply;
+        background:
+            repeating-linear-gradient(118deg, rgba(80, 108, 142, 0.15) 0px, rgba(80, 108, 142, 0.15) 1px, rgba(80, 108, 142, 0) 1px, rgba(80, 108, 142, 0) 16px),
+            repeating-linear-gradient(58deg, rgba(97, 127, 161, 0.09) 0px, rgba(97, 127, 161, 0.09) 1px, rgba(97, 127, 161, 0) 1px, rgba(97, 127, 161, 0) 22px),
+            repeating-radial-gradient(circle at 18% 20%, rgba(116, 146, 178, 0.08) 0 1px, rgba(116, 146, 178, 0) 1px 9px),
+            linear-gradient(90deg, rgba(112, 146, 183, 0.05) 0%, rgba(112, 146, 183, 0.18) 50%, rgba(112, 146, 183, 0.05) 100%);
+    }
+
+    .light_theme[data-card-style="marble-executive"] .hero-identity::after {
+        opacity: 0.34;
+        mix-blend-mode: multiply;
+    }
+
+    .light_theme[data-card-style="marble-executive"] .hero-visual-ring {
+        background: radial-gradient(circle at 24% 18%, rgba(232, 242, 252, 0.97) 0%, rgba(102, 134, 171, 0.94) 56%, rgba(27, 51, 83, 0.93) 100%);
+        box-shadow: 0 0 0 6px rgba(97, 133, 173, 0.26), 0 0 0 17px rgba(97, 133, 173, 0.14), 0 17px 28px rgba(25, 48, 79, 0.32);
     }
 
     .light_theme[data-card-style="marble-executive"] .hero-identity {
-        border-color: rgba(111, 168, 219, 0.3);
-        background: linear-gradient(145deg, rgba(246, 252, 255, 0.94) 0%, rgba(236, 246, 254, 0.95) 100%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 10px 18px rgba(95, 136, 173, 0.16);
+        border-color: rgba(115, 147, 183, 0.34);
+        background:
+            radial-gradient(180% 120% at 8% -24%, rgba(237, 246, 255, 0.38) 0%, rgba(237, 246, 255, 0) 42%),
+            linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(246, 250, 254, 0.96) 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94), inset 0 -1px 0 rgba(120, 151, 186, 0.2), 0 12px 20px rgba(56, 86, 122, 0.18);
     }
 
     .light_theme[data-card-style="marble-executive"] .hero-identity p {
-        color: #2b72a8;
+        color: #1f4f7d;
     }
 
     .light_theme[data-card-style="marble-luxury"] .hero-visual-card {
-        border-color: rgba(169, 211, 244, 0.34);
+        border-color: rgba(136, 168, 202, 0.34);
         background:
-            radial-gradient(144% 112% at 12% -12%, rgba(222, 236, 248, 0.4) 0%, rgba(222, 236, 248, 0) 52%),
-            radial-gradient(120% 136% at 92% 110%, rgba(199, 222, 241, 0.3) 0%, rgba(199, 222, 241, 0) 58%),
-            linear-gradient(162deg, rgba(252, 254, 255, 0.99) 0%, rgba(244, 250, 255, 0.99) 100%);
+            radial-gradient(146% 114% at 12% -12%, rgba(244, 249, 255, 0.45) 0%, rgba(244, 249, 255, 0) 54%),
+            radial-gradient(122% 138% at 92% 110%, rgba(217, 231, 246, 0.28) 0%, rgba(217, 231, 246, 0) 58%),
+            conic-gradient(from 210deg at 88% 16%, rgba(154, 183, 214, 0.13) 0deg, rgba(154, 183, 214, 0) 76deg, rgba(121, 151, 184, 0.12) 132deg, rgba(154, 183, 214, 0) 360deg),
+            linear-gradient(162deg, rgba(255, 255, 255, 0.995) 0%, rgba(248, 251, 255, 0.995) 100%);
         box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.96),
-            inset 0 -1px 0 rgba(152, 191, 222, 0.32),
-            0 20px 34px rgba(94, 136, 171, 0.22),
-            0 0 0 1px rgba(181, 216, 244, 0.2);
+            inset 0 1px 0 rgba(255, 255, 255, 0.97),
+            inset 0 -1px 0 rgba(123, 156, 191, 0.27),
+            0 22px 36px rgba(57, 86, 122, 0.2),
+            0 0 0 1px rgba(170, 199, 227, 0.22);
     }
 
     .light_theme[data-card-style="marble-luxury"] .hero-visual-card::after {
-        opacity: 0.3;
+        opacity: 0.58;
         mix-blend-mode: multiply;
+        background:
+            repeating-linear-gradient(118deg, rgba(88, 116, 148, 0.18) 0px, rgba(88, 116, 148, 0.18) 1px, rgba(88, 116, 148, 0) 1px, rgba(88, 116, 148, 0) 12px),
+            repeating-linear-gradient(58deg, rgba(105, 133, 165, 0.12) 0px, rgba(105, 133, 165, 0.12) 1px, rgba(105, 133, 165, 0) 1px, rgba(105, 133, 165, 0) 18px),
+            repeating-radial-gradient(circle at 18% 20%, rgba(116, 145, 177, 0.12) 0 1px, rgba(116, 145, 177, 0) 1px 8px),
+            linear-gradient(90deg, rgba(124, 156, 190, 0.1) 0%, rgba(124, 156, 190, 0.3) 50%, rgba(124, 156, 190, 0.1) 100%);
+    }
+
+    .light_theme[data-card-style="marble-luxury"] .hero-visual-ring {
+        background: radial-gradient(circle at 24% 18%, rgba(236, 245, 255, 0.99) 0%, rgba(113, 144, 180, 0.94) 58%, rgba(32, 57, 89, 0.92) 100%);
+        box-shadow: 0 0 0 6px rgba(105, 139, 177, 0.25), 0 0 0 17px rgba(105, 139, 177, 0.14), 0 16px 26px rgba(29, 53, 83, 0.28);
     }
 
     .light_theme[data-card-style="marble-luxury"] .hero-identity {
-        border-color: rgba(132, 185, 228, 0.32);
-        background: linear-gradient(145deg, rgba(251, 254, 255, 0.95) 0%, rgba(244, 250, 255, 0.96) 100%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92), 0 11px 19px rgba(97, 139, 173, 0.17);
+        border-color: rgba(119, 151, 186, 0.34);
+        background:
+            radial-gradient(182% 124% at 6% -24%, rgba(238, 247, 255, 0.38) 0%, rgba(238, 247, 255, 0) 42%),
+            linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(247, 251, 255, 0.96) 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94), inset 0 -1px 0 rgba(122, 153, 188, 0.2), 0 12px 20px rgba(57, 87, 123, 0.17);
+    }
+
+    .light_theme[data-card-style="marble-luxury"] .hero-identity::after {
+        opacity: 0.42;
+        mix-blend-mode: multiply;
+    }
+
+    .light_theme[data-card-style="marble-luxury"] .hero-identity h3 {
+        color: #193e67;
+    }
+
+    .light_theme[data-card-style="marble-luxury"] .hero-identity p {
+        color: #1f4f7d;
+    }
+
+    .light_theme[data-card-style="marble-luxury"] .hero-identity ul {
+        color: #2c5b87;
+    }
+
+    .light_theme[data-card-style="marble-luxury"] .hero-identity ul li i {
+        color: #234f78;
     }
 
     @media (max-width: 1320px) {
