@@ -2786,6 +2786,254 @@ function closeProjectModal() {
   document.body.classList.remove("modal-open");
 }
 
+function getSiteLanguage() {
+  return document.documentElement.lang && document.documentElement.lang.toLowerCase().startsWith("es")
+    ? "es"
+    : "en";
+}
+
+function buildContactSubject(templateKey, lang) {
+  const subjects = {
+    es: {
+      general: "Contacto desde tu portfolio",
+      diagnostic: "Solicitud de llamada de diagnóstico",
+      opportunity: "Propuesta laboral o entrevista",
+      project: "Colaboración en proyecto",
+      other: "Consulta desde tu portfolio",
+    },
+    en: {
+      general: "Contact from your portfolio",
+      diagnostic: "Request for a diagnostic call",
+      opportunity: "Job opportunity or interview",
+      project: "Project collaboration",
+      other: "Inquiry from your portfolio",
+    },
+  };
+
+  return subjects[lang][templateKey] || subjects[lang].general;
+}
+
+function buildContactTemplate(templateKey, lang) {
+  const copy = {
+    es: {
+      general: {
+        title: "Escribe tu correo",
+        intro: "Rellena los datos y te dejo el correo listo para abrir en tu app de correo. Rápido, claro y sin pasos innecesarios.",
+        kicker: "Formulario de contacto",
+        messagePlaceholder: "Cuéntame qué necesitas, el contexto y el resultado que esperas obtener.",
+        submitLabel: "Escribir correo",
+      },
+      diagnostic: {
+        title: "Agenda una llamada de diagnóstico",
+        intro: "Cuéntame el proyecto y tu disponibilidad. El correo quedará listo para enviarse en un clic.",
+        kicker: "Llamada de diagnóstico",
+        messagePlaceholder: "Indica el proyecto, el objetivo de la llamada y el mejor horario para hablar.",
+        submitLabel: "Escribir correo",
+      },
+      opportunity: {
+        title: "Proponer oferta o entrevista",
+        intro: "Déjame el contexto de la oportunidad y tus datos. Prepararé un correo limpio y listo.",
+        kicker: "Oferta o entrevista",
+        messagePlaceholder: "Cuéntame el puesto, el contexto y cualquier detalle relevante para valorar la oportunidad.",
+        submitLabel: "Escribir correo",
+      },
+      labels: {
+        name: "Nombre y apellidos",
+        email: "Correo electrónico",
+        phone: "Teléfono",
+        company: "Empresa o proyecto",
+        subject: "Asunto",
+        requestType: "Tipo de contacto",
+        availability: "Cuándo te viene bien hablar",
+        message: "Mensaje",
+        sendNote: "Esto abrirá Gmail con el asunto y el mensaje ya preparados. No se enviará nada sin tu confirmación.",
+      },
+      requestTypes: {
+        general: "Contacto general",
+        diagnostic: "Llamada de diagnóstico",
+        opportunity: "Oferta laboral o entrevista",
+        project: "Proyecto / colaboración",
+        other: "Otro",
+      },
+    },
+    en: {
+      general: {
+        title: "Write your email",
+        intro: "Fill in the details and I will prepare the email draft in your mail app. Fast, clear, and frictionless.",
+        kicker: "Contact form",
+        messagePlaceholder: "Tell me what you need, the context, and the outcome you are aiming for.",
+        submitLabel: "Write email",
+      },
+      diagnostic: {
+        title: "Schedule a diagnostic call",
+        intro: "Share the project and your availability. I will prepare the email so it is ready in one click.",
+        kicker: "Diagnostic call",
+        messagePlaceholder: "Include the project, the goal of the call, and your preferred availability.",
+        submitLabel: "Write email",
+      },
+      opportunity: {
+        title: "Share a job opportunity or interview",
+        intro: "Leave the context of the opportunity and your details. I will prepare a clean, ready-to-send email.",
+        kicker: "Opportunity or interview",
+        messagePlaceholder: "Tell me about the role, context, and any relevant details to assess the opportunity.",
+        submitLabel: "Write email",
+      },
+      labels: {
+        name: "Full name",
+        email: "Email address",
+        phone: "Phone number",
+        company: "Company or project",
+        subject: "Subject",
+        requestType: "Contact type",
+        availability: "Best time to talk",
+        message: "Message",
+        sendNote: "This will open Gmail with the subject and message already prepared. Nothing is sent without your confirmation.",
+      },
+      requestTypes: {
+        general: "General contact",
+        diagnostic: "Diagnostic call",
+        opportunity: "Job offer or interview",
+        project: "Project / collaboration",
+        other: "Other",
+      },
+    },
+  };
+
+  const locale = copy[lang] || copy.en;
+  return {
+    ...locale[templateKey],
+    labels: locale.labels,
+    requestTypes: locale.requestTypes,
+  };
+}
+
+function buildContactEmailPayload(form, templateKey, lang) {
+  const recipient = "jorgeherraizsoler@gmail.com";
+  const subject = form.get("subject")?.trim() || buildContactSubject(templateKey, lang);
+  const name = form.get("name")?.trim() || "-";
+  const email = form.get("email")?.trim() || "-";
+  const phone = form.get("phone")?.trim() || "-";
+  const company = form.get("company")?.trim() || "-";
+  const requestType = form.get("requestType")?.trim() || "-";
+  const availability = form.get("availability")?.trim() || "-";
+  const message = form.get("message")?.trim() || "-";
+
+  const bodyLines = lang === "es"
+    ? [
+        "Hola Jorge,",
+        "",
+        "Te contacto desde tu portfolio con estos datos:",
+        `Nombre: ${name}`,
+        `Correo: ${email}`,
+        `Teléfono: ${phone}`,
+        `Empresa o proyecto: ${company}`,
+        `Tipo de contacto: ${requestType}`,
+        `Disponibilidad: ${availability}`,
+        "",
+        "Mensaje:",
+        message,
+      ]
+    : [
+        "Hi Jorge,",
+        "",
+        "I am reaching out from your portfolio with these details:",
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Phone: ${phone}`,
+        `Company or project: ${company}`,
+        `Contact type: ${requestType}`,
+        `Availability: ${availability}`,
+        "",
+        "Message:",
+        message,
+      ];
+
+  const body = bodyLines.join("\n");
+  return {
+    recipient,
+    subject,
+    body,
+    mailtoUrl: `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+    gmailUrl: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+  };
+}
+
+function buildContactModalHTML(templateKey) {
+  const lang = getSiteLanguage();
+  const template = buildContactTemplate(templateKey, lang);
+  const subjectValue = buildContactSubject(templateKey, lang);
+  const selected = (value) => (templateKey === value ? "selected" : "");
+
+  return `
+    <div class="modal-header">
+      <button class="botonClose" id="close-modal" aria-label="${lang === "es" ? "Cerrar formulario" : "Close form"}">×</button>
+    </div>
+    <div class="modal-scroll contact-modal-scroll">
+      <p class="contact-modal-kicker">${template.kicker}</p>
+      <h2>${template.title}</h2>
+      <p class="contact-modal-intro">${template.intro}</p>
+      <form id="contact-form" class="contact-modal-form">
+        <div class="contact-form-grid">
+          <label class="contact-field">
+            <span>${template.labels.name}</span>
+            <input type="text" name="name" autocomplete="name" required placeholder="${lang === "es" ? "Tu nombre completo" : "Your full name"}">
+          </label>
+          <label class="contact-field">
+            <span>${template.labels.email}</span>
+            <input type="email" name="email" autocomplete="email" required placeholder="${lang === "es" ? "tu@email.com" : "you@email.com"}">
+          </label>
+          <label class="contact-field">
+            <span>${template.labels.phone}</span>
+            <input type="tel" name="phone" autocomplete="tel" required placeholder="${lang === "es" ? "+34 600 000 000" : "+1 555 000 000"}">
+          </label>
+          <label class="contact-field">
+            <span>${template.labels.company}</span>
+            <input type="text" name="company" autocomplete="organization" placeholder="${lang === "es" ? "Empresa, proyecto o rol" : "Company, project, or role"}">
+          </label>
+          <label class="contact-field contact-field-full">
+            <span>${template.labels.subject}</span>
+            <input type="text" name="subject" value="${subjectValue}" required>
+          </label>
+          <label class="contact-field contact-field-full">
+            <span>${template.labels.requestType}</span>
+            <select name="requestType" required>
+              <option value="general" ${selected("general")}>${template.requestTypes.general}</option>
+              <option value="diagnostic" ${selected("diagnostic")}>${template.requestTypes.diagnostic}</option>
+              <option value="opportunity" ${selected("opportunity")}>${template.requestTypes.opportunity}</option>
+              <option value="project" ${selected("project")}>${template.requestTypes.project}</option>
+              <option value="other" ${selected("other")}>${template.requestTypes.other}</option>
+            </select>
+          </label>
+          <label class="contact-field contact-field-full">
+            <span>${template.labels.availability}</span>
+            <input type="text" name="availability" placeholder="${lang === "es" ? "Por ejemplo: martes a partir de las 16:00" : "For example: Tuesday after 4:00 PM"}">
+          </label>
+          <label class="contact-field contact-field-full">
+            <span>${template.labels.message}</span>
+            <textarea name="message" required rows="6" placeholder="${template.messagePlaceholder}"></textarea>
+          </label>
+        </div>
+        <p class="contact-modal-note">${template.labels.sendNote}</p>
+      </form>
+    </div>
+    <div class="modal-footer contact-modal-footer">
+      <div class="project-links contact-modal-actions">
+        <button type="submit" form="contact-form" class="link-button contact-form-submit" data-track-click="true" data-track-channel="contact-form-mailto" data-contact-submit="mailto">${template.submitLabel}</button>
+      </div>
+    </div>
+  `;
+}
+
+function openContactModal(templateKey) {
+  openProjectModal(buildContactModalHTML(templateKey || "general"));
+  window.setTimeout(() => {
+    const firstField = modalContainer.querySelector("#contact-form input[name='name']");
+    if (firstField instanceof HTMLInputElement) {
+      firstField.focus();
+    }
+  }, 0);
+}
+
 // 3. Manejador de eventos para abrir el modal
 articlesContainer.addEventListener("click", (event) => {
   const projectCard = event.target.closest(".project-card");
@@ -2878,6 +3126,33 @@ modalContainer.addEventListener("click", (event) => {
     event.target.id === "modal-container"
   ) {
     closeProjectModal();
+  }
+});
+
+document.addEventListener("click", (event) => {
+  const contactTrigger = event.target.closest("[data-contact-template]");
+  if (!contactTrigger) return;
+
+  event.preventDefault();
+  openContactModal(contactTrigger.getAttribute("data-contact-template") || "general");
+});
+
+modalContainer.addEventListener("submit", (event) => {
+  const form = event.target.closest("#contact-form");
+  if (!form) return;
+
+  event.preventDefault();
+
+  const contactData = new FormData(form);
+  const templateKey = contactData.get("requestType")?.toString() || "general";
+  const lang = getSiteLanguage();
+  const payload = buildContactEmailPayload(contactData, templateKey, lang);
+
+  closeProjectModal();
+
+  const gmailWindow = window.open(payload.gmailUrl, "_blank", "noopener,noreferrer");
+  if (!gmailWindow) {
+    window.location.href = payload.gmailUrl;
   }
 });
 // Lógica para el visor de imágenes (Sección modificada)
