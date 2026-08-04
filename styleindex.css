@@ -2028,6 +2028,85 @@ body.modal-open .containerNav.desktop-nav {
     }
 }
 
+@media (max-width: 560px) {
+    #contenedorContacto.contact-showcase {
+        width: calc(100% - 0.75rem);
+        margin-top: 1rem;
+        padding: 0.92rem 0.62rem 0.85rem;
+        border-radius: 18px;
+    }
+
+    #contenedorContacto .titulos {
+        margin-bottom: 0.58rem;
+    }
+
+    .contact-intro {
+        margin-bottom: 0.78rem;
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .contact-card {
+        max-width: 100%;
+        padding: 0.82rem;
+        border-radius: 16px;
+    }
+
+    .contact-email-line {
+        padding: 0.5rem 0.62rem;
+        margin-bottom: 0.78rem;
+    }
+
+    .contact-email-line a {
+        font-size: 0.88rem;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .contact-availability {
+        grid-template-columns: 1fr;
+        gap: 0.42rem;
+        margin-bottom: 0.78rem;
+    }
+
+    .contact-availability span {
+        padding: 0.5rem 0.58rem;
+        border-radius: 12px;
+        font-size: 0.78rem;
+        line-height: 1.36;
+    }
+
+    .contact-actions {
+        gap: 0.54rem;
+    }
+
+    .contact-btn {
+        width: 100%;
+        min-width: 0;
+        padding: 0.68rem 0.82rem;
+        font-size: 0.9rem;
+        line-height: 1.14;
+    }
+
+    #modal-container .contact-modal-summary {
+        grid-template-columns: 1fr;
+    }
+
+    #modal-container .contact-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #modal-container .contact-modal-footer .contact-modal-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #modal-container .contact-modal-footer .contact-modal-actions .link-button {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
 @media (max-width: 360px) {
     #contenedorContacto.contact-showcase {
         width: calc(100% - 0.55rem);
