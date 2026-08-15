@@ -3198,6 +3198,8 @@ footer p{
     border: 1px solid rgba(208, 240, 255, 0.82);
     box-shadow: 0 0 14px rgba(102, 198, 255, 0.62), inset 0 1px 0 rgba(255, 255, 255, 0.35);
     z-index: 2;
+    color: #05263f;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
 #contenedorRecomendaciones .recommendation-meta-icon::before {
@@ -3226,11 +3228,15 @@ footer p{
 }
 
 #contenedorRecomendaciones .recommendation-meta-icon.rec-dev {
-    background: linear-gradient(145deg, #7dff89 0%, #27d18e 45%, #00adb5 100%);
+    background: linear-gradient(145deg, #b8f27a 0%, #5ec970 45%, #2ea1a9 100%);
 }
 
 #contenedorRecomendaciones .recommendation-meta-icon.rec-support {
     background: linear-gradient(145deg, #ffe56a 0%, #ffae3d 42%, #ff6b57 100%);
+}
+
+#contenedorRecomendaciones .recommendation-meta-icon.rec-marketing {
+    background: linear-gradient(145deg, #ffd071 0%, #ff9a53 45%, #f25e7f 100%);
 }
 
 .light_theme #contenedorRecomendaciones .recommendation-meta-icon {
@@ -3263,6 +3269,31 @@ footer p{
     box-sizing: border-box;
 }
 
+#contenedorRecomendaciones .recommendation-company-logo-wrap-deveco {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    padding: 0;
+    border: 1px solid rgba(111, 166, 218, 0.56);
+    border-radius: 8px;
+    background: linear-gradient(160deg, #041a2d 0%, #06243a 56%, #07304a 100%);
+    box-shadow: 0 6px 14px rgba(2, 20, 36, 0.42), inset 0 1px 0 rgba(145, 201, 255, 0.2);
+    overflow: visible;
+}
+
+#contenedorRecomendaciones .recommendation-company-logo-wrap-deveco .recommendation-company-logo {
+    width: 92px;
+    height: 92px;
+    border-radius: 6px !important;
+    object-fit: contain;
+    padding: 3px !important;
+    border: 1px solid rgba(176, 216, 249, 0.4) !important;
+    box-shadow: 0 4px 10px rgba(10, 28, 47, 0.24) !important;
+    display: block;
+    object-position: center;
+    background: transparent;
+}
+
 #contenedorRecomendaciones .recommendation-company-logo {
     width: 100%;
     height: 100%;
@@ -3290,6 +3321,18 @@ footer p{
         background: #ffffff;
         box-shadow: 0 6px 14px rgba(7, 33, 54, 0.14);
         overflow: hidden;
+    }
+
+    #contenedorRecomendaciones .recommendation-company-logo-wrap-deveco {
+        width: 102px;
+        min-width: 102px;
+        height: 102px;
+        padding: 0;
+        border: 1px solid rgba(111, 166, 218, 0.6);
+        border-radius: 8px;
+        background: linear-gradient(160deg, #041a2d 0%, #06243a 56%, #07304a 100%);
+        box-shadow: 0 6px 14px rgba(2, 20, 36, 0.42), inset 0 1px 0 rgba(145, 201, 255, 0.2);
+        overflow: visible;
     }
 
 
@@ -3324,6 +3367,12 @@ footer p{
     border: 1px solid rgba(179, 193, 206, 0.78);
     background: #ffffff;
     box-shadow: 0 2px 6px rgba(54, 70, 86, 0.09);
+}
+
+.light_theme #contenedorRecomendaciones .recommendation-company-logo-wrap-deveco {
+    border: 1px solid rgba(111, 166, 218, 0.56);
+    background: linear-gradient(160deg, #041a2d 0%, #06243a 56%, #07304a 100%);
+    box-shadow: 0 6px 14px rgba(2, 20, 36, 0.42), inset 0 1px 0 rgba(145, 201, 255, 0.2);
 }
 
 .light_theme #contenedorRecomendaciones .recommendation > p:not(.author) {
@@ -4321,6 +4370,12 @@ sl-tab-panel[name="soporte_itExperiencia"] .info-panel {
     overflow: hidden;
 }
 
+.deveco-logo-frame {
+    background: linear-gradient(160deg, #041a2d 0%, #06243a 56%, #07304a 100%);
+    border: 1px solid rgba(93, 150, 204, 0.62);
+    box-shadow: 0 12px 26px rgba(4, 20, 39, 0.4), inset 0 0 0 1px rgba(126, 191, 245, 0.22);
+}
+
 .unir-logo-frame::before {
     content: "";
     position: absolute;
@@ -4331,10 +4386,20 @@ sl-tab-panel[name="soporte_itExperiencia"] .info-panel {
     background: linear-gradient(90deg, #0e4071 0%, #1d8ae5 55%, #d63a3a 100%);
 }
 
+.deveco-logo-frame::before {
+    background: linear-gradient(90deg, #0f3d6b 0%, #1e78c8 55%, #2ab0d8 100%);
+}
+
 .light_theme .unir-logo-frame {
     background: linear-gradient(145deg, #ffffff 0%, #fcfdff 100%);
     border-color: rgba(18, 88, 148, 0.24);
     box-shadow: 0 10px 24px rgba(13, 58, 95, 0.18), inset 0 0 0 1px rgba(15, 90, 154, 0.15);
+}
+
+.light_theme .deveco-logo-frame {
+    background: linear-gradient(160deg, #041a2d 0%, #06243a 56%, #07304a 100%);
+    border-color: rgba(78, 127, 173, 0.72);
+    box-shadow: 0 10px 22px rgba(10, 42, 69, 0.24), inset 0 0 0 1px rgba(126, 191, 245, 0.2);
 }
 
 .company-logo {
@@ -8784,6 +8849,18 @@ sl-tab-panel.panel-list-animate .subjects-list > li {
         background: #ffffff;
         box-shadow: 0 3px 8px rgba(7, 33, 54, 0.11);
         overflow: hidden;
+    }
+
+    #contenedorRecomendaciones .recommendation-company-logo-wrap-deveco {
+        width: 90px;
+        min-width: 90px;
+        height: 90px;
+        padding: 0;
+        border: 1px solid rgba(111, 166, 218, 0.56);
+        border-radius: 8px;
+        background: linear-gradient(160deg, #041a2d 0%, #06243a 56%, #07304a 100%);
+        box-shadow: 0 5px 12px rgba(2, 20, 36, 0.38), inset 0 1px 0 rgba(145, 201, 255, 0.16);
+        overflow: visible;
     }
 
     #contenedorRecomendaciones .recommendation-company-logo {
